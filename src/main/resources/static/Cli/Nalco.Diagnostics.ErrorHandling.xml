@@ -1,0 +1,1471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nalco.Diagnostics.ErrorHandling</name>
+    </assembly>
+    <members>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.AboutReport">
+            <summary>
+            About report for an application.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AboutReport.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AboutReport.#ctor(System.String)">
+            <summary>
+            Create a new About report with the given about text and default
+            contact information.
+            </summary>
+            <param name="aboutText">Text about the application.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AboutReport.#ctor(System.String,System.String)">
+            <summary>
+            Create a new About report with the given about text and contact
+            information.
+            </summary>
+            <param name="aboutText">Text about the application.</param>
+            <param name="contactInfo">Contact information.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.EmailHandler">
+            <summary>
+            Diagnostic report email handler.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.EmailHandler.SendReport(Nalco.Diagnostics.ErrorHandling.Report)">
+            <summary>
+            Send an email with the given report.
+            </summary>
+            <param name="report">Report to send.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.EmailHandler.SendReport(Nalco.Diagnostics.ErrorHandling.Report,System.Collections.Generic.List{System.IO.FileInfo})">
+            <summary>
+            Send an email with the given report.
+            </summary>
+            <param name="report">Report to send.</param>
+            <param name="attachments">Attachments to include with the email.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.EmailHandler.SendReport(Nalco.Diagnostics.ErrorHandling.Report,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.IO.FileInfo})">
+            <summary>
+            Send an email with the given report.
+            </summary>
+            <param name="report">Report to send.</param>
+            <param name="toAddresses">Email addresses.</param>
+            <param name="attachments">Attachments to include with the email.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.ErrorReport">
+            <summary>
+            Error report for a given exception.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorReport.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorReport.#ctor(System.Exception,System.Boolean,System.Func{System.Exception,System.String})">
+            <summary>
+            Create a new Error report about the given exception.
+            </summary>
+            <param name="ex">Exception to report.</param>
+            <param name="captureScreenshot">True if screenshots should be
+            captured.</param>
+            <param name="programData">Optional callback that returns program
+            provided data.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.AssemblyExt">
+             <summary>
+             Extension class to easily extract assembly properties.
+            
+             Included directly in Nalco.Diagnostics.ErrorHandling so that a reference
+             to Nalco.Core is not required.
+             </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyCompanyName">
+            <summary>
+            Retrieves the company name from the entry assembly, or the executing
+            assembly if an entry assembly does not exist.
+            </summary>
+            <returns>Company name.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyCompanyName(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the company name from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the company name from.</param>
+            <returns>Company name.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyVersion">
+            <summary>
+            Retrieves the version from the entry assembly, or the executing
+            assembly if the entry assembly does not exist.
+            </summary>
+            <returns>Version.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyVersion(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the version from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the version from.</param>
+            <returns>Version.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyInformationalVersion">
+            <summary>
+            Retrieves the informational version from the entry assembly, or the
+            executing assembly if the entry assembly does not exist.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyInformationalVersion(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the informational version from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve information version
+            from.</param>
+            <returns>Information version.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyProductName">
+            <summary>
+            Retrieves the product name from the entry assembly, or the executing
+            assembly if an entry assembly does not exist.
+            </summary>
+            <returns>Product name.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyProductName(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the product name from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the product name from.</param>
+            <returns>Product name.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyCopyright">
+            <summary>
+            Retrieves the copyright from the entry assembly, or the executing
+            assembly if an entry assembly does not exist.
+            </summary>
+            <returns>Copyright.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyCopyright(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the copyright from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the copyright from.</param>
+            <returns>Copyright.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyTitle">
+            <summary>
+            Retrieves the product title from the entry assembly, or the
+            executing assembly if an entry assembly does not exist.
+            </summary>
+            <returns>Product title.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyTitle(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the title from the given assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the title from.</param>
+            <returns>Title.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyDescription">
+            <summary>
+            Retrieves the description from the entry assembly, or the executing
+            assembly if an entry assembly does not exist.
+            </summary>
+            <returns>Description.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.AssemblyExt.GetAssemblyDescription(System.Reflection.Assembly)">
+            <summary>
+            Retrieves the description from the entry assembly.
+            </summary>
+            <param name="assembly">Assembly to retrieve the description from.</param>
+            <returns>Description.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.ConsoleApplication">
+            <summary>
+            Console application error handling.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ConsoleApplication.InitializeErrorHandling">
+            <summary>
+            Initialize error handling for a console application.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ConsoleApplication.NotifyUser(Nalco.Diagnostics.ErrorHandling.ErrorReport,System.String)">
+            <summary>
+            Notify user of unhandled exception.
+            </summary>
+            <param name="report">Error report.</param>
+            <param name="file">Path to error report on disk.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.ErrorHandler">
+            <summary>
+            Error handler.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ThreadExceptionHandler(System.Object,System.Threading.ThreadExceptionEventArgs)">
+            <summary>
+            Unhandled thread exception handler.
+            </summary>
+            <param name="sender">Sender object.</param>
+            <param name="e">Exception event arguments.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.UnhandledExceptionHandler(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            Unhandled exception handler.
+            </summary>
+            <param name="sender">Sender object.</param>
+            <param name="e">Exception event arguments.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.UnobservedTaskExceptionHandler(System.Object,System.Threading.Tasks.UnobservedTaskExceptionEventArgs)">
+            <summary>
+            Unobserved task exception handler.
+            </summary>
+            <param name="sender">Sender object.</param>
+            <param name="e">Exception event arguments.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ReportException(System.Exception)">
+            <summary>
+            Method to log details about an exception to a log file.
+            </summary>
+            <param name="ex">Exception to log.</param>
+            <returns>Path to error report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ReportException(System.Exception,System.String)">
+            <summary>
+            Method to log details about an exception to a log file.
+            </summary>
+            <param name="ex">Exception to log.</param>
+            <param name="path">Path of the directory to log the exception to.</param>
+            <returns>Path to error report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ReportException(System.Exception,System.Action{Nalco.Diagnostics.ErrorHandling.ErrorReport,System.String})">
+            <summary>
+            Method to log details about an exception to a log file.
+            </summary>
+            <param name="ex">Exception to log.</param>
+            <param name="notify">Notification delegate</param>
+            <returns>Path to error report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ReportException(System.Exception,System.String,System.Action{Nalco.Diagnostics.ErrorHandling.ErrorReport,System.String})">
+            <summary>
+            Method to log details about an exception to a log file in the given
+            path.
+            </summary>
+            <param name="ex">Exception to log.</param>
+            <param name="path">Path of the directory to log the exception to.</param>
+            <param name="notify">Notification delegate.</param>
+            <returns>Path to error report.</returns>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.ErrorHandler.NotifyUser">
+            <summary>
+            User-defined delegate to report the exception back to the user after
+            a dump has been written to disk.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.ErrorHandler.CaptureScreenshot">
+            <summary>
+            True if a screenshot of the user's desktop should be captured when
+            creating an error report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.ErrorHandler.ProgramData">
+            <summary>
+            Optional user-defined delegate to provide program specific data
+            when an unhandled exception occurs.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.frmErrorHandler">
+            <summary>
+            Error handler form.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.frmErrorHandler.#ctor(Nalco.Diagnostics.ErrorHandling.ErrorReport,System.String)">
+            <summary>
+            Setup the form for intial display in minimized mode.
+            </summary>
+            <param name="report">Error report.</param>
+            <param name="file">Path to error report on disk.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.frmErrorHandler.cmdDetails_Click(System.Object,System.EventArgs)">
+            <summary>
+            Details handler. Expand/contract form.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.frmErrorHandler.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.frmErrorHandler.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.frmErrorHandler.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.DefaultContactInfo">
+             <summary>
+               Looks up a localized string similar to Data Mobility Systems
+            358 U.S. Route One, Bldg #4
+            Falmouth, ME 04105
+            Phone: (207) 781-5700
+            Fax: (207) 781-5566
+            www.datamobility.com
+            www.nalco.com.
+             </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.Details">
+            <summary>
+              Looks up a localized string similar to &lt;span class=&apos;title&apos;&gt;{0}:&lt;/span&gt; &lt;span&gt;{1}&lt;/span&gt;&lt;br /&gt;.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.HTMLReport">
+             <summary>
+               Looks up a localized string similar to &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
+            &lt;html lang=&quot;en&quot; xml:lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+            &lt;head&gt;
+            	&lt;meta content=&quot;text/html;charset=utf-8&quot; http-equiv=&quot;Content-Type&quot; /&gt;
+            	&lt;title&gt;{0}&lt;/title&gt;
+            	&lt;style type=&quot;text/css&quot;&gt;
+            		#wrapper {{
+            			margin-left: auto;
+            			margin-right: auto;
+            			border: 1px solid #000;
+            			min-width: 600px;
+            			max-width: 900px;
+            			padding: 1em;
+            		}}
+            
+            		a img {{
+            			text-decoration: none;
+            			border: 0 none;
+            		}}
+             [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.Info">
+             <summary>
+               Looks up a localized string similar to 		&lt;div class=&apos;infoblock&apos;&gt;
+            			&lt;h3 class=&apos;infotitle&apos;&gt;{0}&lt;/h3&gt;
+            			&lt;div class=&apos;info&apos;&gt;
+            {1}			&lt;/div&gt;
+            		&lt;/div&gt;
+            .
+             </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.MHTReport">
+             <summary>
+               Looks up a localized string similar to Content-Type: multipart/related; type=&quot;text/html&quot;; boundary=&quot;{0}&quot;
+            MIME-Version: 1.0
+            
+            --{0}
+            Content-Type: text/html; charset=&quot;utf-8&quot;
+            
+            {1}
+            {2}
+            
+            --{0}--
+            .
+             </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.NextPart">
+            <summary>
+              Looks up a localized string similar to ----=NextPart_000.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.NotifyError">
+            <summary>
+              Looks up a localized string similar to An unhandled error occurred. A report with details about the error has been saved. It is recommended that you attempt to save any work and restart the program. If this error continues please contact an administrator..
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Properties.Resources.SectionContent">
+             <summary>
+               Looks up a localized string similar to --{0}
+            Content-Type: {1}
+            Content-Transfer-Encoding: base64
+            Content-Location: {2}
+            
+            {3}
+            .
+             </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Report">
+            <summary>
+            Abstract base class for creating reports that can be
+            serialized/deserialized and converted to html/mht/text.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Report.Sections">
+            <summary>
+            Report sections.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Report.AppDomainFriendlyName">
+            <summary>
+            Application friendly name.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Report.Date">
+            <summary>
+            Report date.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Report.Title">
+            <summary>
+            Report title.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.#ctor">
+            <summary>
+            Protected parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.#ctor(System.String)">
+            <summary>
+            Constructor to be used by specific reports.
+            </summary>
+            <param name="title">Title of the report.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.#ctor(System.String,System.Collections.Generic.List{Nalco.Diagnostics.ErrorHandling.Sections.Section})">
+            <summary>
+            Constructor to be used to create a general report.
+            </summary>
+            <param name="title">Title of the report.</param>
+            <param name="sections">Sections.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.ToHtml">
+            <summary>
+            Convert the report to HTML.
+            </summary>
+            <returns>HTML representation of the report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.ToMht">
+            <summary>
+            Convert the report to MHT.
+            </summary>
+            <returns>MHT representation of the report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.ToText">
+            <summary>
+            Convert the report to text.
+            </summary>
+            <returns>Text representation of the report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.AddSystemInfoSections">
+            <summary>
+            Add all of the system information sections to the Section List.
+            This is used for the ErrorReport and for the AboutReport classes.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.InitializeSections">
+            <summary>
+            Initialize each section contained in the report.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Report.EncodeString(System.String)">
+            <summary>
+            Takes a string and replaces all the Environment.NewLines with
+            a html line break <br /> and a Environment.NewLine.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.ReportHandler">
+            <summary>
+            Report serialization handler.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.ReportHandler.REPORT_EXT_PATTERN">
+            <summary>
+            Default report file file extension.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.ReportHandler.HTML_EXT">
+            <summary>
+            HTML report extension.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.ReportHandler.MHT_EXT">
+            <summary>
+            MHT report extension.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.ReportHandler.sSerializers">
+            <summary>
+            Cache xml serializers when extra types are required.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.WriteHtmlReport(System.String,Nalco.Diagnostics.ErrorHandling.Report)">
+            <summary>
+            Write the report to a HTML file along with any external content
+            (screen shots).
+            </summary>
+            <param name="path">Path to write to.</param>
+            <param name="report">Report to write out.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.WriteMhtReport(System.String,Nalco.Diagnostics.ErrorHandling.Report)">
+            <summary>
+            Write the report to a MHT file.
+            </summary>
+            <param name="path">Path to write to.</param>
+            <param name="report">Report to write out.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.Serialize(System.String,Nalco.Diagnostics.ErrorHandling.Report)">
+            <summary>
+            Serialize the given report to the given file.
+            </summary>
+            <param name="path">Path to serialize to.</param>
+            <param name="report">Report to serialize.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.Serialize(System.String,Nalco.Diagnostics.ErrorHandling.Report,System.Type[])">
+            <summary>
+            Serialize the given report to the given file.
+            </summary>
+            <param name="path">Path to serialize to.</param>
+            <param name="report">Report to serialize.</param>
+            <param name="extraTypes">Additional object types to serialize.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.Deserialize(System.String)">
+            <summary>
+            Deserialize the given report from the given file.
+            </summary>
+            <param name="path">Path to deserialize.</param>
+            <returns>Deserialized report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.Deserialize(System.String,System.Type[])">
+            <summary>
+            Deserialize the given report from the given file.
+            </summary>
+            <param name="path">Path to deserialize.</param>
+            <param name="extraTypes">Additional object types to serialize.</param>
+            <returns>Deserialized report.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ReportHandler.GetSerializer(System.Type[])">
+            <summary>
+            Get an XmlSerializer based on any extra types required for
+            serialization.
+            </summary>
+            <param name="extraTypes">Additional object types to serialize.</param>
+            <returns>XmlSerializer</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection">
+            <summary>
+            About section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.AboutText">
+            <summary>
+            About text.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.ContactInfo">
+            <summary>
+            Contact information.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.#ctor(System.String,System.String)">
+            <summary>
+            Create a new about section with the given about text and contact
+            information.
+            </summary>
+            <param name="aboutText">Text about the application.</param>
+            <param name="contactInfo">Contact information.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.AboutSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.DetailsSection">
+            <summary>
+            Generic details section for a report.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DetailsSection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DetailsSection.#ctor(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}})">
+            <summary>
+            Create a new DetailsSection with the given details.
+            </summary>
+            <param name="details">Details.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DetailsSection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection">
+            <summary>
+            Driver information section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.Drives">
+            <summary>
+            Machine drive information.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.Initialize">
+            <summary>
+            Initialize the section with information for each drive.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo">
+            <summary>
+            Wrapper around DriveInfo to allow serialization.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.IsReady">
+            <summary>
+            True if drive is ready.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.VolumeLabel">
+            <summary>
+            Drive volume label.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.Name">
+            <summary>
+            Drive name.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.DriveType">
+            <summary>
+            Drive type.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.AvailableFreeSpace">
+            <summary>
+            Available free space, in bytes.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.TotalSize">
+            <summary>
+            Total size, in bytes.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.#ctor">
+            <summary>
+            Parameterless constructor for serialization
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.DriveInformationSection.SerializableDriveInfo.#ctor(System.IO.DriveInfo)">
+            <summary>
+            Constructor to capture information for the given DriveInfo.
+            </summary>
+            <param name="di">Drive information to capture for serialization.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.EnvironmentVariablesSection">
+            <summary>
+            Environment variables section for a report.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.EnvironmentVariablesSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.EnvironmentVariablesSection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection">
+            <summary>
+            Exception section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.Message">
+            <summary>
+            Exception message.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.StackTrace">
+            <summary>
+            Exception stack trace.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.Data">
+            <summary>
+            Exception data.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.PropertyInfo">
+            <summary>
+            Exception property information.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.#ctor(System.Exception)">
+            <summary>
+            Inialize a new ExceptionSection based on the given exception.
+            </summary>
+            <param name="exception">Exception to base section on.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ExceptionSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2">
+            <summary>
+            Generic section for all sections that are formed from KVPs
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2.KVPs">
+            <summary>
+            Key/value pairs.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2.KVPToHTML(Nalco.Diagnostics.ErrorHandling.Sections.SerializableKeyValuePair{`0,`1})">
+            <summary>
+            This method converts a key value pair into HTML code.
+            </summary>
+            <param name="kvp">kvp is the key value pair to be converted.</param>
+            <returns>HTML representation of a single key value pair</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2.GetHTMLBody">
+            <summary>
+            This method loops through a list of key value pairs, and converts
+            them all into a single block of HTML code by way of the KVPToHTML()
+            method.
+            </summary>
+            <returns>HTML representation of list of key value pairs</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.KVPSection`2.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.SectionContent">
+            <summary>
+            Section content.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SectionContent.ContentType">
+            <summary>
+            Content mime-type.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SectionContent.ContentLocation">
+            <summary>
+            Content location.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SectionContent.Content">
+            <summary>
+            Content value.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SectionContent.#ctor(System.String,System.String,System.Byte[])">
+            <summary>
+            Initialize a new SectionContent.
+            </summary>
+            <param name="contentType">Value of Content-Type header.</param>
+            <param name="contentLocation">Value of Content-Location header.</param>
+            <param name="content">Content of the section as a byte array.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.SerializableKeyValuePair`2">
+            <summary>
+            Wrapper around a key/value pair to allow serialization.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SerializableKeyValuePair`2.Key">
+            <summary>
+            Key.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SerializableKeyValuePair`2.Value">
+            <summary>
+            Value.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SerializableKeyValuePair`2.#ctor(`0,`1)">
+            <summary>
+            Constructor to capture key/value to serialize.
+            </summary>
+            <param name="key">Key.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection">
+            <summary>
+            Loaded assemblies section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.Assemblies">
+            <summary>
+            Loaded assemblies.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.Initialize">
+            <summary>
+            Initialize the section with information for each loaded assembly.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly">
+            <summary>
+            Wrapper around Assembly to allow serialization.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly.Name">
+            <summary>
+            Assembly name.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly.Info">
+            <summary>
+            Assembly information.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly.FullyQualifiedName">
+            <summary>
+            Fully qualified assembly name.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.LoadedAssembliesSection.SerializableAssembly.#ctor(System.Reflection.Assembly,System.Text.RegularExpressions.Match)">
+            <summary>
+            Constructor to capture information for the given assembly.
+            </summary>
+            <param name="assembly">Assembly to capture for serialization.</param>
+            <param name="match">Match that pulled out assembly details.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection">
+            <summary>
+            Memory section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.TotalMemory">
+            <summary>
+            Total memory, in bytes.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.Status">
+            <summary>
+            Memory status details.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.Initialize">
+            <summary>
+            Initialize the section with the current memory profile.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.Physical">
+            <summary>
+            String representation of system physical memory profile.
+            </summary>
+            <returns>String representation of system physical memory profile.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.PageFile">
+            <summary>
+            String representation of system page file memory profile.
+            </summary>
+            <returns>String representation of system page file memory profile.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MemorySection.Virtual">
+            <summary>
+            String representation of system virtual memory profile.
+            </summary>
+            <returns>String representation of system virtual memory profile.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX">
+            <summary>
+            Contains information about the current state of both physical and
+            virtual memory, including extended memory. The GlobalMemoryStatusEx
+            function stores information in this structure.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.length">
+            <summary>
+            The size of the structure, in bytes. You must set this member before calling GlobalMemoryStatusEx.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.memoryLoad">
+            <summary>
+            A number between 0 and 100 that specifies the approximate percentage
+            of physical memory that is in use (0 indicates no memory use and 100
+            indicates full memory use).
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.totalPhys">
+            <summary>
+            The amount of actual physical memory, in bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.availPhys">
+            <summary>
+            The amount of physical memory currently available, in bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.totalPageFile">
+            <summary>
+            The current committed memory limit for the system or the current
+            process, whichever is smaller, in bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.availPageFile">
+            <summary>
+            The maximum amount of memory the current process can commit, in
+            bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.totalVirtual">
+            <summary>
+            The size of the user-mode portion of the virtual address space of
+            the calling process, in bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.availVirtual">
+            <summary>
+            The amount of unreserved and uncommitted memory currently in the
+            user-mode portion of the virtual address space of the calling
+            process, in bytes.
+            </summary>
+        </member>
+        <member name="F:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.availExtendedVirtual">
+            <summary>
+            Reserved. This value is always 0.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.MEMORYSTATUSEX.#ctor">
+            <summary>
+            Initialize MEMORYSTATUSEX structure.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection">
+            <summary>
+            Program provided data section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.Data">
+            <summary>
+            Program defined data.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.#ctor(System.Exception,System.Func{System.Exception,System.String})">
+            <summary>
+            Create a new program data section with the given expcetion and
+            program data delegate.
+            </summary>
+            <param name="ex">Exception to pass to the program.</param>
+            <param name="programData">Program given delegate.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ProgramDataSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection">
+            <summary>
+            Screenshot section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.Bitmaps">
+            <summary>
+            Collection of screenshot bitmaps.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.Initialize">
+            <summary>
+            Initialize the section with a screenshot of each monitor.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SerializableBitmap">
+            <summary>
+            Wrapper around Bitmap to allow serialization.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SerializableBitmap.Bitmap">
+            <summary>
+            Bitmap.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SerializableBitmap.Filename">
+            <summary>
+            Bitmap file name.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SerializableBitmap.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.ScreenSection.SerializableBitmap.#ctor(System.Byte[],System.String)">
+            <summary>
+            Constructor to capture information for the given bitmap.
+            </summary>
+            <param name="bitmap">Bitmap to capture for serialization.</param>
+            <param name="filename">File name.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.Section">
+            <summary>
+            Abstract base class for creating report sections that can be
+            serialized/deserialized and converted to html/mht/text.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.Section.Title">
+            <summary>
+            Section title.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.#ctor">
+            <summary>
+            Protected parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.#ctor(System.String)">
+            <summary>
+            Constructor to be used by specific sections.
+            </summary>
+            <param name="title">Section title.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.ToHtml">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.GetHTMLBody">
+            <summary>
+            This method returns just the body of a particular section's HTML
+            code.
+            </summary>
+            <returns>The HTML of a sectio without its title</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.Section.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection">
+            <summary>
+            Summary section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.Text">
+            <summary>
+            Summary text.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.Reports">
+            <summary>
+            Attached reports.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.#ctor(System.String,System.Collections.Generic.List{Nalco.Diagnostics.ErrorHandling.Report})">
+            <summary>
+            Create a new Summary section with the given text and summary of the
+            given reports.
+            </summary>
+            <param name="text">User supplied text.</param>
+            <param name="reports">List of reports to create a summary for.</param>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.Initialize">
+            <summary>
+            Initialize the section.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SummarySection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.SystemFoldersSection">
+            <summary>
+            System folders section for a report.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemFoldersSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemFoldersSection.Initialize">
+            <summary>
+            Initialize the section with information for each system folder.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection">
+            <summary>
+            System information section for a report.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.MachineName">
+            <summary>
+            Machine name.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.CurrentDirectory">
+            <summary>
+            Current directory.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.CommandLineArgs">
+            <summary>
+            Command line arguments.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.ProcessorCount">
+            <summary>
+            Machine processor count.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.ThreadCount">
+            <summary>
+            Process thread count.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.OSVersionString">
+            <summary>
+            Operating system version string.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.OSBits">
+            <summary>
+            Operating system bit architecture.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.CLRVersion">
+            <summary>
+            .NET CLR version.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.Screens">
+            <summary>
+            Display screen details.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.CurrentCulture">
+            <summary>
+            Current culture.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.CurrentUICulture">
+            <summary>
+            Current UI culture.
+            </summary>
+        </member>
+        <member name="P:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.IPAddresses">
+            <summary>
+            Machine IP address details.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.#ctor">
+            <summary>
+            Parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.Initialize">
+            <summary>
+            Initialize the section with system information.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.GetHTMLBody">
+            <summary>
+            Convert the section to HTML.
+            </summary>
+            <returns>HTML representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.ToText">
+            <summary>
+            Convert the section to text.
+            </summary>
+            <returns>Text representation of the section.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.SectionContent">
+            <summary>
+            Yields the enumeration of content blocks for this section.
+            </summary>
+            <returns>Enumeration of content blocks.</returns>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.Sections.SystemInfoSection.Is64BitMachine">
+            <summary>
+            Returns if the machine is 64 bit.
+            </summary>
+            <returns>True if the machine is 64 bit.</returns>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.SummaryReport">
+            <summary>
+            Summary report that includes a quick view of a number of other reports.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.SummaryReport.#ctor">
+            <summary>
+            Private parameterless constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.SummaryReport.#ctor(System.String,System.Collections.Generic.List{Nalco.Diagnostics.ErrorHandling.Report})">
+            <summary>
+            Create a new Summary report with the given user text for the given
+            reports.
+            </summary>
+            <param name="text">User supplied text.</param>
+            <param name="reports">List of reports to create a summary for.</param>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.ServiceApplication">
+            <summary>
+            Windows service application error handling.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.ServiceApplication.InitializeErrorHandling">
+            <summary>
+            Initialize error handling for a windows service application.
+            </summary>
+        </member>
+        <member name="T:Nalco.Diagnostics.ErrorHandling.WindowsApplication">
+            <summary>
+            Windows forms application error handling.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.WindowsApplication.InitializeErrorHandling">
+            <summary>
+            Initialize error handling for a windows forms application.
+            </summary>
+        </member>
+        <member name="M:Nalco.Diagnostics.ErrorHandling.WindowsApplication.NotifyUser(Nalco.Diagnostics.ErrorHandling.ErrorReport,System.String)">
+            <summary>
+            Notify user of unhandled exception.
+            </summary>
+            <param name="report">Error report.</param>
+            <param name="file">Path to error report on disk.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,654 @@
+<?xml version="1.0"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="ErrorReport">
+  <Sections>
+    <Section xsi:type="ExceptionSection">
+      <Title>System.InvalidOperationException</Title>
+      <Message>The stream cannot be speciated. This can be caused by an unspecified pH or M-Alkalnity, or a product being added to the stream consuming all the M-Alkalinity.</Message>
+      <StackTrace>   at Ecolab.Modeling.UnitOperation.Helpers.StreamExt.Speciate(Stream inStream, Boolean usePh, Temperature pHScaleTemp, Boolean usepAlk) in D:\Work\CalculationPlatform-1\Modeling\UnitOperation\Helpers\StreamExt.cs:line 238
+   at Ecolab.Modeling.Cli.Program.Speciate(String[] args, Boolean speciateBypH) in D:\Work\CalculationPlatform-1\Modeling\Cli\Program.cs:line 63
+   at Ecolab.Modeling.Cli.Program.Main(String[] args) in D:\Work\CalculationPlatform-1\Modeling\Cli\Program.cs:line 32</StackTrace>
+      <Data />
+      <PropertyInfo>
+        <SerializableKeyValuePairOfStringString>
+          <Key>TargetSite</Key>
+          <Value>Void Speciate(Ecolab.Modeling.Streams.Stream, Boolean, Nalco.Numerics.SI.Temperature, Boolean)</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>HelpLink</Key>
+          <Value>NULL</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Source</Key>
+          <Value>Ecolab.Modeling.UnitOperation</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>HResult</Key>
+          <Value>-2146233079</Value>
+        </SerializableKeyValuePairOfStringString>
+      </PropertyInfo>
+    </Section>
+    <Section xsi:type="SystemInfoSection">
+      <Title>System Information</Title>
+      <MachineName>USNB1708087R6XN</MachineName>
+      <UserName>hgoodman</UserName>
+      <CurrentDirectory>C:\Users\hgoodman\Desktop\Speciation for Shield</CurrentDirectory>
+      <CommandLineArgs>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Ecolab.Modeling.Cli.exe speciate-ph C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\input.json C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\output.json</CommandLineArgs>
+      <ProcessorCount>8</ProcessorCount>
+      <ThreadCount>6</ThreadCount>
+      <OSVersionString>Microsoft Windows NT 6.2.9200.0</OSVersionString>
+      <OSBits>32</OSBits>
+      <CLRVersion>4.0.30319.42000</CLRVersion>
+      <Screens>
+        <string>1920x1080</string>
+        <string>1920x1080</string>
+      </Screens>
+      <CurrentCulture>en-US</CurrentCulture>
+      <CurrentUICulture>en-US</CurrentUICulture>
+      <IPAddresses>
+        <string>fe80::91f2:10fc:c21a:2585%12</string>
+        <string>10.160.55.205</string>
+      </IPAddresses>
+    </Section>
+    <Section xsi:type="MemorySection">
+      <Title>Memory Profile</Title>
+      <TotalMemory>1412888</TotalMemory>
+      <Status>
+        <length>64</length>
+        <memoryLoad>47</memoryLoad>
+        <totalPhys>16993816576</totalPhys>
+        <availPhys>8879321088</availPhys>
+        <totalPageFile>20349259776</totalPageFile>
+        <availPageFile>10012545024</availPageFile>
+        <totalVirtual>4294836224</totalVirtual>
+        <availVirtual>4078903296</availVirtual>
+        <availExtendedVirtual>0</availExtendedVirtual>
+      </Status>
+    </Section>
+    <Section xsi:type="DriveInformationSection">
+      <Title>Drive Information</Title>
+      <Drives>
+        <SerializableDriveInfo>
+          <IsReady>true</IsReady>
+          <VolumeLabel>OSDisk</VolumeLabel>
+          <Name>C:\</Name>
+          <DriveType>Fixed</DriveType>
+          <AvailableFreeSpace>328954945536</AvailableFreeSpace>
+          <TotalSize>510225973248</TotalSize>
+        </SerializableDriveInfo>
+        <SerializableDriveInfo>
+          <IsReady>true</IsReady>
+          <VolumeLabel>HOME</VolumeLabel>
+          <Name>H:\</Name>
+          <DriveType>Network</DriveType>
+          <AvailableFreeSpace>2983015124992</AvailableFreeSpace>
+          <TotalSize>15668040695808</TotalSize>
+        </SerializableDriveInfo>
+        <SerializableDriveInfo>
+          <IsReady>true</IsReady>
+          <VolumeLabel>nap_apps</VolumeLabel>
+          <Name>N:\</Name>
+          <DriveType>Network</DriveType>
+          <AvailableFreeSpace>2983015124992</AvailableFreeSpace>
+          <TotalSize>15668040695808</TotalSize>
+        </SerializableDriveInfo>
+        <SerializableDriveInfo>
+          <IsReady>true</IsReady>
+          <VolumeLabel>groups</VolumeLabel>
+          <Name>O:\</Name>
+          <DriveType>Network</DriveType>
+          <AvailableFreeSpace>2983015124992</AvailableFreeSpace>
+          <TotalSize>15668040695808</TotalSize>
+        </SerializableDriveInfo>
+        <SerializableDriveInfo>
+          <IsReady>true</IsReady>
+          <VolumeLabel>nap_archive</VolumeLabel>
+          <Name>Z:\</Name>
+          <DriveType>Network</DriveType>
+          <AvailableFreeSpace>2983015124992</AvailableFreeSpace>
+          <TotalSize>15668040695808</TotalSize>
+        </SerializableDriveInfo>
+      </Drives>
+    </Section>
+    <Section xsi:type="EnvironmentVariablesSection">
+      <Title>Environment Variables</Title>
+      <KVPs>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PROCESSOR_ARCHITEW6432</Key>
+          <Value>AMD64</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ADAPTIVACLIENT</Key>
+          <Value>C:\Program Files (x86)\Adaptiva\AdaptivaClient</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>COMPUTERNAME</Key>
+          <Value>USNB1708087R6XN</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>DriverData</Key>
+          <Value>C:\Windows\System32\Drivers\DriverData</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonProgramFiles(x86)</Key>
+          <Value>C:\Program Files (x86)\Common Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>OneDrive</Key>
+          <Value>C:\Users\hgoodman\OneDrive - Ecolab</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>HOMEPATH</Key>
+          <Value>\</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SAPLOGON_INI_FILE</Key>
+          <Value>C:\ProgramData\SAP\saplogon.ini</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PROCESSOR_REVISION</Key>
+          <Value>5e03</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PATHEXT</Key>
+          <Value>.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>UATDATA</Key>
+          <Value>C:\WINDOWS\CCM\UATData\D9F8C395-CAB8-491d-B8AC-179A1FE1BE77</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>TMP</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Temp</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>TEMP</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Temp</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>LOCALAPPDATA</Key>
+          <Value>C:\Users\hgoodman\AppData\Local</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PUBLIC</Key>
+          <Value>C:\Users\Public</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>USERDNSDOMAIN</Key>
+          <Value>GLOBAL.ECOLAB.CORP</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>USERDOMAIN</Key>
+          <Value>GLOBAL</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramFiles(x86)</Key>
+          <Value>C:\Program Files (x86)</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Path</Key>
+          <Value>C:\Program Files\Microsoft Office\Root\Office16\;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\WebEx\Productivity Tools;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\hgoodman\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Microsoft Office\root\Client</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PROCESSOR_LEVEL</Key>
+          <Value>6</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PROCESSOR_IDENTIFIER</Key>
+          <Value>Intel64 Family 6 Model 94 Stepping 3, GenuineIntel</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>TVT</Key>
+          <Value>C:\Program Files (x86)\Lenovo</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>WecVersionForRosebud.2164</Key>
+          <Value>6</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PSModulePath</Key>
+          <Value>C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\PowerShell\Modules\</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>NUMBER_OF_PROCESSORS</Key>
+          <Value>8</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>FPS_BROWSER_USER_PROFILE_STRING</Key>
+          <Value>Default</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonProgramFiles</Key>
+          <Value>C:\Program Files (x86)\Common Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>asl.log</Key>
+          <Value>Destination=file</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>HOMESHARE</Key>
+          <Value>\\nalco.one.net\US-Naperville\home\hgoodman</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramData</Key>
+          <Value>C:\ProgramData</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramW6432</Key>
+          <Value>C:\Program Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramFiles</Key>
+          <Value>C:\Program Files (x86)</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PLMVIS_82_LIBPATH</Key>
+          <Value>C:\Program Files (x86)\SAP\FrontEnd\SAPgui\Program</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SystemRoot</Key>
+          <Value>C:\WINDOWS</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SESSIONNAME</Key>
+          <Value>Console</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonProgramW6432</Key>
+          <Value>C:\Program Files\Common Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>LOGONSERVER</Key>
+          <Value>\\USNAPADGLDC15P</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>USERPROFILE</Key>
+          <Value>C:\Users\hgoodman</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>USERDOMAIN_ROAMINGPROFILE</Key>
+          <Value>GLOBAL</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>APPDATA</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>HOMEDRIVE</Key>
+          <Value>H:</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>OneDriveCommercial</Key>
+          <Value>C:\Users\hgoodman\OneDrive - Ecolab</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>USERNAME</Key>
+          <Value>hgoodman</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>FPS_BROWSER_APP_PROFILE_STRING</Key>
+          <Value>Internet Explorer</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PROCESSOR_ARCHITECTURE</Key>
+          <Value>x86</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>OS</Key>
+          <Value>Windows_NT</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ComSpec</Key>
+          <Value>C:\WINDOWS\system32\cmd.exe</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SystemDrive</Key>
+          <Value>C:</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>windir</Key>
+          <Value>C:\WINDOWS</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ALLUSERSPROFILE</Key>
+          <Value>C:\ProgramData</Value>
+        </SerializableKeyValuePairOfStringString>
+      </KVPs>
+    </Section>
+    <Section xsi:type="SystemFoldersSection">
+      <Title>System Folders</Title>
+      <KVPs>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Desktop</Key>
+          <Value>C:\Users\hgoodman\Desktop</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Programs</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyDocuments</Key>
+          <Value>C:\Users\hgoodman\Documents</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyDocuments</Key>
+          <Value>C:\Users\hgoodman\Documents</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Favorites</Key>
+          <Value>C:\Users\hgoodman\Favorites</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Startup</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Recent</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Recent</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SendTo</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\SendTo</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>StartMenu</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Start Menu</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyMusic</Key>
+          <Value>C:\Users\hgoodman\Music</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyVideos</Key>
+          <Value>C:\Users\hgoodman\Videos</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>DesktopDirectory</Key>
+          <Value>C:\Users\hgoodman\Desktop</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyComputer</Key>
+          <Value />
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>NetworkShortcuts</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Network Shortcuts</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Fonts</Key>
+          <Value>C:\WINDOWS\Fonts</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Templates</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Templates</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonStartMenu</Key>
+          <Value>C:\ProgramData\Microsoft\Windows\Start Menu</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonPrograms</Key>
+          <Value>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonStartup</Key>
+          <Value>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonDesktopDirectory</Key>
+          <Value>C:\Users\Public\Desktop</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ApplicationData</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>PrinterShortcuts</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Printer Shortcuts</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>LocalApplicationData</Key>
+          <Value>C:\Users\hgoodman\AppData\Local</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>InternetCache</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Microsoft\Windows\INetCache</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Cookies</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Microsoft\Windows\INetCookies</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>History</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Microsoft\Windows\History</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonApplicationData</Key>
+          <Value>C:\ProgramData</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Windows</Key>
+          <Value>C:\WINDOWS</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>System</Key>
+          <Value>C:\WINDOWS\system32</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramFiles</Key>
+          <Value>C:\Program Files (x86)</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>MyPictures</Key>
+          <Value>C:\Users\hgoodman\Pictures</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>UserProfile</Key>
+          <Value>C:\Users\hgoodman</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>SystemX86</Key>
+          <Value>C:\WINDOWS\SysWOW64</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>ProgramFilesX86</Key>
+          <Value>C:\Program Files (x86)</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonProgramFiles</Key>
+          <Value>C:\Program Files (x86)\Common Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonProgramFilesX86</Key>
+          <Value>C:\Program Files (x86)\Common Files</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonTemplates</Key>
+          <Value>C:\ProgramData\Microsoft\Windows\Templates</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonDocuments</Key>
+          <Value>C:\Users\Public\Documents</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonAdminTools</Key>
+          <Value>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>AdminTools</Key>
+          <Value>C:\Users\hgoodman\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Administrative Tools</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonMusic</Key>
+          <Value>C:\Users\Public\Music</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonPictures</Key>
+          <Value>C:\Users\Public\Pictures</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonVideos</Key>
+          <Value>C:\Users\Public\Videos</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>Resources</Key>
+          <Value>C:\WINDOWS\resources</Value>
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>LocalizedResources</Key>
+          <Value />
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CommonOemLinks</Key>
+          <Value />
+        </SerializableKeyValuePairOfStringString>
+        <SerializableKeyValuePairOfStringString>
+          <Key>CDBurning</Key>
+          <Value>C:\Users\hgoodman\AppData\Local\Microsoft\Windows\Burn\Burn</Value>
+        </SerializableKeyValuePairOfStringString>
+      </KVPs>
+    </Section>
+    <Section xsi:type="LoadedAssembliesSection">
+      <Title>Loaded Assemblies</Title>
+      <Assemblies>
+        <SerializableAssembly>
+          <Name>mscorlib</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Ecolab.Modeling.Cli</Name>
+          <Info>Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Ecolab.Modeling.Cli.exe</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Nalco.Diagnostics.ErrorHandling</Name>
+          <Info>Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Nalco.Diagnostics.ErrorHandling.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Nalco.Core</Name>
+          <Info>Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Nalco.Core.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Runtime</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Ecolab.Modeling</Name>
+          <Info>Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Ecolab.Modeling.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Newtonsoft.Json</Name>
+          <Info>Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Newtonsoft.Json.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Ecolab.Modeling.UnitOperation</Name>
+          <Info>Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Ecolab.Modeling.UnitOperation.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Collections</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Collections\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Collections.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>NalcoSteam97</Name>
+          <Info>Version=0.1.0.48, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\NalcoSteam97.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>NalcoThermoSupport</Name>
+          <Info>Version=0.1.0.6, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\NalcoThermoSupport.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Resources.ResourceManager</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Resources.ResourceManager\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Resources.ResourceManager.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Reflection</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Reflection\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Reflection.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Runtime.Extensions</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Extensions\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.Extensions.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Core</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Numerics</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Numerics\v4.0_4.0.0.0__b77a5c561934e089\System.Numerics.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Runtime.Serialization</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Serialization.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Data</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Xml</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Microsoft.VisualBasic</Name>
+          <Info>Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.VisualBasic\v4.0_10.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualBasic.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Threading</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Threading\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Threading.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>Ecolab.Speciation</Name>
+          <Info>Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Info>
+          <FullyQualifiedName>C:\Users\hgoodman\Desktop\Speciation for Shield\Cli\Ecolab.Speciation.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Globalization</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Globalization\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Globalization.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Drawing</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Windows.Forms</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</FullyQualifiedName>
+        </SerializableAssembly>
+        <SerializableAssembly>
+          <Name>System.Configuration</Name>
+          <Info>Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Info>
+          <FullyQualifiedName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullyQualifiedName>
+        </SerializableAssembly>
+      </Assemblies>
+    </Section>
+  </Sections>
+  <AppDomainFriendlyName>Ecolab.Modeling.Cli.exe</AppDomainFriendlyName>
+  <Date>2020-02-10T08:04:30.906037-06:00</Date>
+  <Title>Unhandled System.InvalidOperationException in Ecolab.Modeling.Cli.exe</Title>
+</Report>

@@ -1,0 +1,52 @@
+[
+  {
+    "product": "PC-191T",
+    "CaCO3": 145,
+    "CaSO4": 2.80,
+    "Ca3PO42": 1.00,
+    "SiO2": 1.54,
+    "FlOFAl": 10,
+    "FlOfFe": 15,
+    "FlOfMn": 15
+  },
+  {
+    "product": "PC-1611T",
+    "CaCO3": 90,
+    "CaSO4": 2.80,
+    "Ca3PO42": 1.00,
+    "SiO2": 1.54,
+    "FlOFAl": 4.4,
+    "FlOfFe": 6.5,
+    "FlOfMn": 6.5
+  },
+  {
+    "product": "PC-510T",
+    "CaCO3": 145,
+    "CaSO4": 2.80,
+    "Ca3PO42": 1.00,
+    "SiO2": 2.80,
+    "FlOFAl": 10,
+    "FlOfFe": 15,
+    "FlOfMn": 15
+  },
+  {
+    "product": "PC-520",
+    "CaCO3": 145,
+    "CaSO4": 2.80,
+    "Ca3PO42": 1.00,
+    "SiO2": 2.80,
+    "Al": 0.4,
+    "Fe": 0.4,
+    "Mn": 0.4
+  },
+  {
+    "product": "PC-520T",
+    "CaCO3": 145,
+    "CaSO4": 2.80,
+    "Ca3PO42": 1.00,
+    "SiO2": 2.80,
+    "Al": 0.4,
+    "Fe": 0.4,
+    "Mn": 0.4
+  }
+]

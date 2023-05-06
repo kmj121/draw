@@ -1,0 +1,53 @@
+[{
+  "property": "Ba",
+  "charge": 2,
+  "wt": 137
+}, {
+  "property": "Ca",
+  "charge": 2,
+  "wt": 40.08
+}, {
+  "property": "Mg",
+  "charge": 2,
+  "wt": 24.3
+}, {
+  "property": "K",
+  "charge": 1,
+  "wt": 39
+}, {
+  "property": "Na",
+  "charge": 1,
+  "wt": 23
+}, {
+  "property": "PO4",
+  "charge": 2,
+  "wt": 95
+}, {
+  "property": "Cl",
+  "charge": 1,
+  "wt": 35.45
+}, {
+  "property": "F",
+  "charge": 1,
+  "wt": 19
+}, {
+  "property": "NO3",
+  "charge": 1,
+  "wt": 62
+}, {
+  "property": "NO2",
+  "charge": 1,
+  "wt": 46
+}, {
+  "property": "SO4",
+  "charge": 2,
+  "wt": 96
+}, {
+  "property": "HCO3",
+  "charge": 1,
+  "wt": 61
+}, {
+  "property": "CO3",
+  "charge": 2,
+  "wt": 60
+}]

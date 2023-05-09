@@ -1,8 +1,8 @@
 package com.example.draw.utils;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
@@ -22,407 +22,452 @@ public class ProgramsPdfUtils extends PdfUtils {
                 , "333"
                 , "444");
 
-        if (params.containsKey("${lightFlag}")) {
-            buildTitle(document, "背景", "在微电子行业，膜分离技术是制备超纯水和废水回用工艺中不可替代的主流技术。工业回用水中普遍存在各种有机物、无机物和微生物。这些物质与微生物本身产生的粘液杂混在一起形成生物粘泥，极易造成膜表面污染。微生物污染积累迅速，不仅造成膜分离装置产水流量和质量降低、增加系统操作压力进而导致能耗增加等问题，还因为频繁化学清洗消耗大量人力并增加运行费用，甚至会缩短膜的使用寿命。");
-
-            buildBackendParaL(document);
-
-            buildTitle(document, "水质分析", "为进一步了解水中可能存在的污染物，对保安过滤器进水进行水质分析，结果见下：");
-
-            buildWaterTableL(document
-                    , params.get("${aluminum}").toString()
-                    , params.get("${iron}").toString()
-                    , params.get("${silica}").toString()
-                    , params.get("${copper}").toString()
-                    , params.get("${totalBacteriaCount}").toString()
-                    , params.get("${ph}").toString()
-                    , params.get("${conductivity}").toString()
-                    , params.get("${temperature}").toString()
-                    , params.get("${chemicalOxygenD}").toString()
-                    , params.get("${totalOrganicC}").toString()
-                    , params.get("${turbidity}").toString());
-            //            todo
-//            buildWaterTableL(document, "", "", "", "", "", "", "", "", "", "", "");
-
-            buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-            buildFunctionTable(document
-                    , params.get("${cfrfValue}").toString()
-                    , params.get("${cipValue}").toString()
-                    , params.get("${ocfValue}").toString());
-            //            todo
-//            buildFunctionTable(document, "", "", "");
-
-            document.newPage();
-
-            buildTitle(document, "解决方案", "基于对回用系统水质和运行性能的了解，对该系统进行诊断，推荐以下方案：");
-
-            buildProgramTable(document, tableMap.get("light_product_table"));
-
-            buildTitle(document, "系统性能预测", "使用推荐的化学品方案后的反渗透系统性能预测如下：");
-
-            buildForecastTable(document
-                    , params.get("${cfrfValue}").toString()
-                    , params.get("${cfrfValueNew}").toString()
-                    , params.get("${cipValue}").toString()
-                    , params.get("${cipValueNew}").toString()
-                    , params.get("${ocfValue}").toString()
-                    , params.get("${ocfValueNew}").toString());
-            //            todo
-//            buildForecastTable(document, "", "", "", "", "", "");
-        } else if (params.containsKey("${heavyFlag}")) {
-
-            buildTitle(document, "背景", "工业回用水中普遍存在各种有机物、无机物和微生物。这些物质与微生物本身产生的粘液杂混在一起形成生物粘泥，极易造成膜表面污染。微生物污染积累迅速，不仅造成膜分离装置产水流量和质量降低、增加系统操作压力进而导致能耗增加等问题，还因为频繁化学清洗消耗大量人力并增加运行费用，甚至会缩短膜的使用寿命。");
-
-            buildBackendParaH(document);
-
-            buildTitle(document, "水质分析", "为进一步了解水中可能存在的污染物，对系统进水进行水质分析，结果见下。");
-
-            //重工业按杀菌剂，阻垢剂，杀菌剂+阻垢剂  分类
-            if (params.containsKey("${heavyBFlag}")) {
-                //基本表单
-                buildWaterTableHB(document
-                        , params.get("${aluminum}").toString()
-                        , params.get("${ironTotal}").toString()
-                        , params.get("${silica}").toString()
-                        , params.get("${magnesium}").toString()
-                        , params.get("${manganese}").toString()
-                        , params.get("${calcium}").toString()
-                        , params.get("${totalBacteriaCount}").toString()
-                        , params.get("${ph}").toString()
-                        , params.get("${recoveryRate}").toString()
-                        , params.get("${siltDensityIndex}").toString()
-                        , params.get("${chemicalOxygenDemand}").toString());
+        buildHomePage(document);
 
 
-                buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-                buildFunctionTable(document
-                        , params.get("${cfrfValue}").toString()
-                        , params.get("${cipValue}").toString()
-                        , params.get("${ocfValue}").toString());
-                //除硅表单
-                if (params.containsKey("${aluminum1}")) {
-                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
-
-                    buildWaterTableHB(document
-                            , params.get("${aluminum1}").toString()
-                            , params.get("${ironTotal1}").toString()
-                            , params.get("${silica1}").toString()
-                            , params.get("${magnesium1}").toString()
-                            , params.get("${manganese1}").toString()
-                            , params.get("${calcium1}").toString()
-                            , params.get("${totalBacteriaCount1}").toString()
-                            , params.get("${ph1}").toString()
-                            , params.get("${recoveryRate1}").toString()
-                            , params.get("${siltDensityIndex1}").toString()
-                            , params.get("${chemicalOxygenDemand1}").toString());
 
 
-                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//        if (params.containsKey("${lightFlag}")) {
+//            buildTitle(document, "背景", "在微电子行业，膜分离技术是制备超纯水和废水回用工艺中不可替代的主流技术。工业回用水中普遍存在各种有机物、无机物和微生物。这些物质与微生物本身产生的粘液杂混在一起形成生物粘泥，极易造成膜表面污染。微生物污染积累迅速，不仅造成膜分离装置产水流量和质量降低、增加系统操作压力进而导致能耗增加等问题，还因为频繁化学清洗消耗大量人力并增加运行费用，甚至会缩短膜的使用寿命。");
+//
+//            buildBackendParaL(document);
+//
+//            buildTitle(document, "水质分析", "为进一步了解水中可能存在的污染物，对保安过滤器进水进行水质分析，结果见下：");
+//
+//            buildWaterTableL(document
+//                    , params.get("${aluminum}").toString()
+//                    , params.get("${iron}").toString()
+//                    , params.get("${silica}").toString()
+//                    , params.get("${copper}").toString()
+//                    , params.get("${totalBacteriaCount}").toString()
+//                    , params.get("${ph}").toString()
+//                    , params.get("${conductivity}").toString()
+//                    , params.get("${temperature}").toString()
+//                    , params.get("${chemicalOxygenD}").toString()
+//                    , params.get("${totalOrganicC}").toString()
+//                    , params.get("${turbidity}").toString());
+//            //            todo
+////            buildWaterTableL(document, "", "", "", "", "", "", "", "", "", "", "");
+//
+//            buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//            buildFunctionTable(document
+//                    , params.get("${cfrfValue}").toString()
+//                    , params.get("${cipValue}").toString()
+//                    , params.get("${ocfValue}").toString());
+//            //            todo
+////            buildFunctionTable(document, "", "", "");
+//
+//            document.newPage();
+//
+//            buildTitle(document, "解决方案", "基于对回用系统水质和运行性能的了解，对该系统进行诊断，推荐以下方案：");
+//
+//            buildProgramTable(document, tableMap.get("light_product_table"));
+//
+//            buildTitle(document, "系统性能预测", "使用推荐的化学品方案后的反渗透系统性能预测如下：");
+//
+//            buildForecastTable(document
+//                    , params.get("${cfrfValue}").toString()
+//                    , params.get("${cfrfValueNew}").toString()
+//                    , params.get("${cipValue}").toString()
+//                    , params.get("${cipValueNew}").toString()
+//                    , params.get("${ocfValue}").toString()
+//                    , params.get("${ocfValueNew}").toString());
+//            //            todo
+////            buildForecastTable(document, "", "", "", "", "", "");
+//        } else if (params.containsKey("${heavyFlag}")) {
+//
+//            buildTitle(document, "背景", "工业回用水中普遍存在各种有机物、无机物和微生物。这些物质与微生物本身产生的粘液杂混在一起形成生物粘泥，极易造成膜表面污染。微生物污染积累迅速，不仅造成膜分离装置产水流量和质量降低、增加系统操作压力进而导致能耗增加等问题，还因为频繁化学清洗消耗大量人力并增加运行费用，甚至会缩短膜的使用寿命。");
+//
+//            buildBackendParaH(document);
+//
+//            buildTitle(document, "水质分析", "为进一步了解水中可能存在的污染物，对系统进水进行水质分析，结果见下。");
+//
+//            //重工业按杀菌剂，阻垢剂，杀菌剂+阻垢剂  分类
+//            if (params.containsKey("${heavyBFlag}")) {
+//                //基本表单
+//                buildWaterTableHB(document
+//                        , params.get("${aluminum}").toString()
+//                        , params.get("${ironTotal}").toString()
+//                        , params.get("${silica}").toString()
+//                        , params.get("${magnesium}").toString()
+//                        , params.get("${manganese}").toString()
+//                        , params.get("${calcium}").toString()
+//                        , params.get("${totalBacteriaCount}").toString()
+//                        , params.get("${ph}").toString()
+//                        , params.get("${recoveryRate}").toString()
+//                        , params.get("${siltDensityIndex}").toString()
+//                        , params.get("${chemicalOxygenDemand}").toString());
+//
+//
+//                buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                buildFunctionTable(document
+//                        , params.get("${cfrfValue}").toString()
+//                        , params.get("${cipValue}").toString()
+//                        , params.get("${ocfValue}").toString());
+//                //除硅表单
+//                if (params.containsKey("${aluminum1}")) {
+//                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHB(document
+//                            , params.get("${aluminum1}").toString()
+//                            , params.get("${ironTotal1}").toString()
+//                            , params.get("${silica1}").toString()
+//                            , params.get("${magnesium1}").toString()
+//                            , params.get("${manganese1}").toString()
+//                            , params.get("${calcium1}").toString()
+//                            , params.get("${totalBacteriaCount1}").toString()
+//                            , params.get("${ph1}").toString()
+//                            , params.get("${recoveryRate1}").toString()
+//                            , params.get("${siltDensityIndex1}").toString()
+//                            , params.get("${chemicalOxygenDemand1}").toString());
+//
+//
+//                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                    buildFunctionTable(document
+//                            , params.get("${cfrfValue1}").toString()
+//                            , params.get("${cipValue1}").toString()
+//                            , params.get("${ocfValue1}").toString());
+//                }
+//                //N3108表单
+//                if (params.containsKey("${aluminum2}")) {
+//
+//                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHB(document
+//                            , params.get("${aluminum2}").toString()
+//                            , params.get("${ironTotal2}").toString()
+//                            , params.get("${silica2}").toString()
+//                            , params.get("${magnesium2}").toString()
+//                            , params.get("${manganese2}").toString()
+//                            , params.get("${calcium2}").toString()
+//                            , params.get("${totalBacteriaCount2}").toString()
+//                            , params.get("${ph2}").toString()
+//                            , params.get("${recoveryRate2}").toString()
+//                            , params.get("${siltDensityIndex2}").toString()
+//                            , params.get("${chemicalOxygenDemand2}").toString());
+//
+//
+//                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                    buildFunctionTable(document
+//                            , params.get("${cfrfValue2}").toString()
+//                            , params.get("${cipValue2}").toString()
+//                            , params.get("${ocfValue2}").toString());
+//                }
+//
+//            } else if (params.containsKey("${heavySFlag}")) {
+//                //基本表单
+//                buildWaterTableHS(document
+//                        , params.get("${aluminum}").toString()
+//                        , params.get("${silica}").toString()
+//                        , params.get("${sodium}").toString()
+//                        , params.get("${magnesium}").toString()
+//                        , params.get("${barium}").toString()
+//                        , params.get("${kalium}").toString()
+//                        , params.get("${manganese}").toString()
+//                        , params.get("${strontium}").toString()
+//                        , params.get("${fluorine}").toString()
+//                        , params.get("${chlorine}").toString()
+//                        , params.get("${bromine}").toString()
+//                        , params.get("${calcium}").toString()
+//                        , params.get("${sulfate}").toString()
+//                        , params.get("${nitrate}").toString()
+//                        , params.get("${phosphate}").toString()
+//                        , params.get("${bicarbonate}").toString()
+//                        , params.get("${ironTotal}").toString()
+//                        , params.get("${ferricIon}").toString()
+//                        , params.get("${ferrous}").toString()
+//                        , params.get("${temperature}").toString()
+//                        , params.get("${ph}").toString()
+//                        , params.get("${influentFlow}").toString()
+//                        , params.get("${recoveryRate}").toString()
+//                        , params.get("${chemicalOxygenDemand}").toString()
+//                        , params.get("${siltDensityIndex}").toString());
+//                //除硅表单
+//                if (params.containsKey("${aluminum1}")) {
+//                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHS(document
+//                            , params.get("${aluminum1}").toString()
+//                            , params.get("${silica1}").toString()
+//                            , params.get("${sodium1}").toString()
+//                            , params.get("${magnesium1}").toString()
+//                            , params.get("${barium1}").toString()
+//                            , params.get("${kalium1}").toString()
+//                            , params.get("${manganese1}").toString()
+//                            , params.get("${strontium1}").toString()
+//                            , params.get("${fluorine1}").toString()
+//                            , params.get("${chlorine11}").toString()
+//                            , params.get("${bromine1}").toString()
+//                            , params.get("${calcium1}").toString()
+//                            , params.get("${sulfate1}").toString()
+//                            , params.get("${nitrate1}").toString()
+//                            , params.get("${phosphate1}").toString()
+//                            , params.get("${bicarbonate1}").toString()
+//                            , params.get("${ironTotal1}").toString()
+//                            , params.get("${ferricIon1}").toString()
+//                            , params.get("${ferrous1}").toString()
+//                            , params.get("${temperature1}").toString()
+//                            , params.get("${ph1}").toString()
+//                            , params.get("${influentFlow1}").toString()
+//                            , params.get("${recoveryRate1}").toString()
+//                            , params.get("${chemicalOxygenDemand1}").toString()
+//                            , params.get("${siltDensityIndex1}").toString());
+//                }
+//
+//                //N3108表单
+//                if (params.containsKey("${aluminum2}")) {
+//                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHS(document
+//                            , params.get("${aluminum2}").toString()
+//                            , params.get("${silica2}").toString()
+//                            , params.get("${sodium2}").toString()
+//                            , params.get("${magnesium2}").toString()
+//                            , params.get("${barium2}").toString()
+//                            , params.get("${kalium2}").toString()
+//                            , params.get("${manganese2}").toString()
+//                            , params.get("${strontium2}").toString()
+//                            , params.get("${fluorine2}").toString()
+//                            , params.get("${chlorine2}").toString()
+//                            , params.get("${bromine2}").toString()
+//                            , params.get("${calcium2}").toString()
+//                            , params.get("${sulfate2}").toString()
+//                            , params.get("${nitrate2}").toString()
+//                            , params.get("${phosphate2}").toString()
+//                            , params.get("${bicarbonate2}").toString()
+//                            , params.get("${ironTotal2}").toString()
+//                            , params.get("${ferricIon2}").toString()
+//                            , params.get("${ferrous2}").toString()
+//                            , params.get("${temperature2}").toString()
+//                            , params.get("${ph2}").toString()
+//                            , params.get("${influentFlow2}").toString()
+//                            , params.get("${recoveryRate2}").toString()
+//                            , params.get("${chemicalOxygenDemand2}").toString()
+//                            , params.get("${siltDensityIndex2}").toString());
+//                }
+//
+//            } else if (params.containsKey("${heavyBSFlag}")) {
+//                //基本表单
+//                buildWaterTableHBS(document
+//                        , params.get("${aluminum}").toString()
+//                        , params.get("${silica}").toString()
+//                        , params.get("${sodium}").toString()
+//                        , params.get("${magnesium}").toString()
+//                        , params.get("${barium}").toString()
+//                        , params.get("${kalium}").toString()
+//                        , params.get("${manganese}").toString()
+//                        , params.get("${strontium}").toString()
+//                        , params.get("${fluorine}").toString()
+//                        , params.get("${chlorine}").toString()
+//                        , params.get("${bromine}").toString()
+//                        , params.get("${calcium}").toString()
+//                        , params.get("${sulfate}").toString()
+//                        , params.get("${nitrate}").toString()
+//                        , params.get("${phosphate}").toString()
+//                        , params.get("${bicarbonate}").toString()
+//                        , params.get("${ironTotal}").toString()
+//                        , params.get("${ferricIon}").toString()
+//                        , params.get("${ferrous}").toString()
+//                        , params.get("${temperature}").toString()
+//                        , params.get("${ph}").toString()
+//                        , params.get("${influentFlow}").toString()
+//                        , params.get("${recoveryRate}").toString()
+//                        , params.get("${chemicalOxygenDemand}").toString()
+//                        , params.get("${siltDensityIndex}").toString()
+//                        , params.get("${totalBacteriaCount}").toString());
+//
+//
+//                buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                buildFunctionTable(document
+//                        , params.get("${cfrfValue}").toString()
+//                        , params.get("${cipValue}").toString()
+//                        , params.get("${ocfValue}").toString());
+//
+//                //除硅表单
+//                if (params.containsKey("${aluminum1}")) {
+//                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHBS(document
+//                            , params.get("${aluminum1}").toString()
+//                            , params.get("${silica1}").toString()
+//                            , params.get("${sodium1}").toString()
+//                            , params.get("${magnesium1}").toString()
+//                            , params.get("${barium1}").toString()
+//                            , params.get("${kalium1}").toString()
+//                            , params.get("${manganese1}").toString()
+//                            , params.get("${strontium1}").toString()
+//                            , params.get("${fluorine1}").toString()
+//                            , params.get("${chlorine1}").toString()
+//                            , params.get("${bromine1}").toString()
+//                            , params.get("${calcium1}").toString()
+//                            , params.get("${sulfate1}").toString()
+//                            , params.get("${nitrate1}").toString()
+//                            , params.get("${phosphate1}").toString()
+//                            , params.get("${bicarbonate1}").toString()
+//                            , params.get("${ironTotal1}").toString()
+//                            , params.get("${ferricIon1}").toString()
+//                            , params.get("${ferrous1}").toString()
+//                            , params.get("${temperature1}").toString()
+//                            , params.get("${ph1}").toString()
+//                            , params.get("${influentFlow1}").toString()
+//                            , params.get("${recoveryRate1}").toString()
+//                            , params.get("${chemicalOxygenDemand1}").toString()
+//                            , params.get("${siltDensityIndex1}").toString()
+//                            , params.get("${totalBacteriaCount1}").toString());
+//
+//
+//                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                    buildFunctionTable(document
+//                            , params.get("${cfrfValue1}").toString()
+//                            , params.get("${cipValue1}").toString()
+//                            , params.get("${ocfValue1}").toString());
+//                }
+//
+//                //N3108表单
+//                if (params.containsKey("${aluminum2}")) {
+//                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
+//
+//                    buildWaterTableHBS(document
+//                            , params.get("${aluminum2}").toString()
+//                            , params.get("${silica2}").toString()
+//                            , params.get("${sodium2}").toString()
+//                            , params.get("${magnesium2}").toString()
+//                            , params.get("${barium2}").toString()
+//                            , params.get("${kalium2}").toString()
+//                            , params.get("${manganese2}").toString()
+//                            , params.get("${strontium2}").toString()
+//                            , params.get("${fluorine2}").toString()
+//                            , params.get("${chlorine2}").toString()
+//                            , params.get("${bromine2}").toString()
+//                            , params.get("${calcium2}").toString()
+//                            , params.get("${sulfate2}").toString()
+//                            , params.get("${nitrate2}").toString()
+//                            , params.get("${phosphate2}").toString()
+//                            , params.get("${bicarbonate2}").toString()
+//                            , params.get("${ironTotal2}").toString()
+//                            , params.get("${ferricIon2}").toString()
+//                            , params.get("${ferrous2}").toString()
+//                            , params.get("${temperature2}").toString()
+//                            , params.get("${ph2}").toString()
+//                            , params.get("${influentFlow2}").toString()
+//                            , params.get("${recoveryRate2}").toString()
+//                            , params.get("${chemicalOxygenDemand2}").toString()
+//                            , params.get("${siltDensityIndex2}").toString()
+//                            , params.get("${totalBacteriaCount2}").toString());
+//
+//                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
+//
+//                    buildFunctionTable(document
+//                            , params.get("${cfrfValue2}").toString()
+//                            , params.get("${cipValue2}").toString()
+//                            , params.get("${ocfValue2}").toString());
+//                }
+//            }
+//
+//
+//            document.newPage();
+//
+//            buildTitle(document, "解决方案", "基于对回用系统水质和运行性能的了解，对该系统进行诊断，推荐以下方案：");
+//
+//            if (params.containsKey("${heavy_desilication_flag}")) {
+//                buildParagraph(document, "除硅预处理推荐方案内容", fontBlack);
+//
+//                buildDesilicationTable(document
+//                        , params.containsKey("${heroSuggestions}") ? params.get("${heroSuggestions}").toString() : null
+//                        , params.containsKey("${n1998SISuggestions}") ? params.get("${n1998SISuggestions}").toString() : null
+//                        , params.get("${n1998SIProductName}").toString()
+//                        , params.get("${n1998SIProductValue}").toString()
+//                        , params.get("${n1998SIAddingPlace}").toString()
+//                        , params.get("${n1998SIAddingType}").toString()
+//                        , params.get("${sludgeGenerationName}").toString()
+//                        , params.get("${sludgeGenerationValue}").toString()
+//                        , params.get("${sludgeGenerationUse}").toString()
+//                        , params.get("${sludgeGenerationExplain}").toString()
+//                        , params.get("${extraCausticNeededName}").toString()
+//                        , params.get("${extraCausticNeededValue}").toString()
+//                        , params.get("${extraCausticNeededUse}").toString()
+//                        , params.get("${extraCausticNeededExplain}").toString());
+//            }
+//            if (params.containsKey("${heavy_N3108_flag}")) {
+//                buildParagraph(document, "N3108预处理推荐方案内容", fontBlack);
+//
+//                buildN3108Table(document
+//                        , params.get("${n3108ProductName}").toString()
+//                        , params.get("${n3108Value}").toString()
+//                        , params.get("${n3108AddingPlace}").toString()
+//                        , params.get("${n3108AddingType}").toString());
+//            }
+//            if (params.containsKey("${heavy_product_flag}")) {
+//                buildParagraph(document, "杀菌剂推荐方案内容", fontBlack);
+//
+//                buildProgramTable(document, tableMap.get("heavy_product_table"));
+//            }
+//            if (params.containsKey("${heavy_scale_inhibitor_flag}")) {
+//                buildParagraph(document, "阻垢剂推荐方案内容", fontBlack);
+//
+//                buildScaleInhibitorTable(document
+//                        , params.get("${feedCalciteSrValue}") == null ? "" : params.get("${feedCalciteSrValue}").toString()
+//                        , params.get("${feedLSIValue}") == null ? "" : params.get("${feedLSIValue}").toString()
+//                        , params.get("${concentrationfactorValue}") == null ? "" : params.get("${concentrationfactorValue}").toString()
+//                        , params.get("${pHValue}") == null ? "" : params.get("${pHValue}").toString()
+//                        , params.get("${calciteSRValue}") == null ? "" : params.get("${calciteSRValue}").toString()
+//                        , params.get("${concentrateLSIValue}") == null ? "" : params.get("${concentrateLSIValue}").toString()
+//                        , params.get("${caValue}") == null ? "" : params.get("${caValue}").toString()
+//                        , params.get("${siO2Value}") == null ? "" : params.get("${siO2Value}").toString()
+//                        , params.get("${mgValue}") == null ? "" : params.get("${mgValue}").toString()
+//                        , tableMap.get("heavy_scale_inhibitor_table"));
+//            }
+//
+//            if (params.containsKey("${heavy_msg_flag}")) {
+//                buildParagraph(document, params.get("${heavy_msg_flag}").toString(), fontBlack);
+//            }
+//
+//        }
+    }
 
-                    buildFunctionTable(document
-                            , params.get("${cfrfValue1}").toString()
-                            , params.get("${cipValue1}").toString()
-                            , params.get("${ocfValue1}").toString());
-                }
-                //N3108表单
-                if (params.containsKey("${aluminum2}")) {
+    public void buildHomePage(Document document) throws DocumentException, IOException {
+        for (int i=0; i<=10; i++) {
+            /**
+             * 雇前背景调查报告
+             */
+            PdfPTable table1 = new PdfPTable(new float[]{50});
+            //创建第一列
+            PdfPCell table1Cell1 = new PdfPCell();
+            //隐藏边框
+            table1Cell1.disableBorderSide(15);
+            //设置列高
+            table1Cell1.setFixedHeight(36);
+            //上下居中
+            table1Cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            //添加文本，字体蓝色/18号/加粗
+            table1Cell1.setPhrase(new Phrase("雇前背景调查报告", titleFont1));
+            table1.addCell(table1Cell1);
+            document.add(table1);
 
-                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
-
-                    buildWaterTableHB(document
-                            , params.get("${aluminum2}").toString()
-                            , params.get("${ironTotal2}").toString()
-                            , params.get("${silica2}").toString()
-                            , params.get("${magnesium2}").toString()
-                            , params.get("${manganese2}").toString()
-                            , params.get("${calcium2}").toString()
-                            , params.get("${totalBacteriaCount2}").toString()
-                            , params.get("${ph2}").toString()
-                            , params.get("${recoveryRate2}").toString()
-                            , params.get("${siltDensityIndex2}").toString()
-                            , params.get("${chemicalOxygenDemand2}").toString());
-
-
-                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-                    buildFunctionTable(document
-                            , params.get("${cfrfValue2}").toString()
-                            , params.get("${cipValue2}").toString()
-                            , params.get("${ocfValue2}").toString());
-                }
-
-            } else if (params.containsKey("${heavySFlag}")) {
-                //基本表单
-                buildWaterTableHS(document
-                        , params.get("${aluminum}").toString()
-                        , params.get("${silica}").toString()
-                        , params.get("${sodium}").toString()
-                        , params.get("${magnesium}").toString()
-                        , params.get("${barium}").toString()
-                        , params.get("${kalium}").toString()
-                        , params.get("${manganese}").toString()
-                        , params.get("${strontium}").toString()
-                        , params.get("${fluorine}").toString()
-                        , params.get("${chlorine}").toString()
-                        , params.get("${bromine}").toString()
-                        , params.get("${calcium}").toString()
-                        , params.get("${sulfate}").toString()
-                        , params.get("${nitrate}").toString()
-                        , params.get("${phosphate}").toString()
-                        , params.get("${bicarbonate}").toString()
-                        , params.get("${ironTotal}").toString()
-                        , params.get("${ferricIon}").toString()
-                        , params.get("${ferrous}").toString()
-                        , params.get("${temperature}").toString()
-                        , params.get("${ph}").toString()
-                        , params.get("${influentFlow}").toString()
-                        , params.get("${recoveryRate}").toString()
-                        , params.get("${chemicalOxygenDemand}").toString()
-                        , params.get("${siltDensityIndex}").toString());
-                //除硅表单
-                if (params.containsKey("${aluminum1}")) {
-                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
-
-                    buildWaterTableHS(document
-                            , params.get("${aluminum1}").toString()
-                            , params.get("${silica1}").toString()
-                            , params.get("${sodium1}").toString()
-                            , params.get("${magnesium1}").toString()
-                            , params.get("${barium1}").toString()
-                            , params.get("${kalium1}").toString()
-                            , params.get("${manganese1}").toString()
-                            , params.get("${strontium1}").toString()
-                            , params.get("${fluorine1}").toString()
-                            , params.get("${chlorine11}").toString()
-                            , params.get("${bromine1}").toString()
-                            , params.get("${calcium1}").toString()
-                            , params.get("${sulfate1}").toString()
-                            , params.get("${nitrate1}").toString()
-                            , params.get("${phosphate1}").toString()
-                            , params.get("${bicarbonate1}").toString()
-                            , params.get("${ironTotal1}").toString()
-                            , params.get("${ferricIon1}").toString()
-                            , params.get("${ferrous1}").toString()
-                            , params.get("${temperature1}").toString()
-                            , params.get("${ph1}").toString()
-                            , params.get("${influentFlow1}").toString()
-                            , params.get("${recoveryRate1}").toString()
-                            , params.get("${chemicalOxygenDemand1}").toString()
-                            , params.get("${siltDensityIndex1}").toString());
-                }
-
-                //N3108表单
-                if (params.containsKey("${aluminum2}")) {
-                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
-
-                    buildWaterTableHS(document
-                            , params.get("${aluminum2}").toString()
-                            , params.get("${silica2}").toString()
-                            , params.get("${sodium2}").toString()
-                            , params.get("${magnesium2}").toString()
-                            , params.get("${barium2}").toString()
-                            , params.get("${kalium2}").toString()
-                            , params.get("${manganese2}").toString()
-                            , params.get("${strontium2}").toString()
-                            , params.get("${fluorine2}").toString()
-                            , params.get("${chlorine2}").toString()
-                            , params.get("${bromine2}").toString()
-                            , params.get("${calcium2}").toString()
-                            , params.get("${sulfate2}").toString()
-                            , params.get("${nitrate2}").toString()
-                            , params.get("${phosphate2}").toString()
-                            , params.get("${bicarbonate2}").toString()
-                            , params.get("${ironTotal2}").toString()
-                            , params.get("${ferricIon2}").toString()
-                            , params.get("${ferrous2}").toString()
-                            , params.get("${temperature2}").toString()
-                            , params.get("${ph2}").toString()
-                            , params.get("${influentFlow2}").toString()
-                            , params.get("${recoveryRate2}").toString()
-                            , params.get("${chemicalOxygenDemand2}").toString()
-                            , params.get("${siltDensityIndex2}").toString());
-                }
-
-            } else if (params.containsKey("${heavyBSFlag}")) {
-                //基本表单
-                buildWaterTableHBS(document
-                        , params.get("${aluminum}").toString()
-                        , params.get("${silica}").toString()
-                        , params.get("${sodium}").toString()
-                        , params.get("${magnesium}").toString()
-                        , params.get("${barium}").toString()
-                        , params.get("${kalium}").toString()
-                        , params.get("${manganese}").toString()
-                        , params.get("${strontium}").toString()
-                        , params.get("${fluorine}").toString()
-                        , params.get("${chlorine}").toString()
-                        , params.get("${bromine}").toString()
-                        , params.get("${calcium}").toString()
-                        , params.get("${sulfate}").toString()
-                        , params.get("${nitrate}").toString()
-                        , params.get("${phosphate}").toString()
-                        , params.get("${bicarbonate}").toString()
-                        , params.get("${ironTotal}").toString()
-                        , params.get("${ferricIon}").toString()
-                        , params.get("${ferrous}").toString()
-                        , params.get("${temperature}").toString()
-                        , params.get("${ph}").toString()
-                        , params.get("${influentFlow}").toString()
-                        , params.get("${recoveryRate}").toString()
-                        , params.get("${chemicalOxygenDemand}").toString()
-                        , params.get("${siltDensityIndex}").toString()
-                        , params.get("${totalBacteriaCount}").toString());
-
-
-                buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-                buildFunctionTable(document
-                        , params.get("${cfrfValue}").toString()
-                        , params.get("${cipValue}").toString()
-                        , params.get("${ocfValue}").toString());
-
-                //除硅表单
-                if (params.containsKey("${aluminum1}")) {
-                    buildParagraph(document, "除硅预处理后参数内容", fontBlack);
-
-                    buildWaterTableHBS(document
-                            , params.get("${aluminum1}").toString()
-                            , params.get("${silica1}").toString()
-                            , params.get("${sodium1}").toString()
-                            , params.get("${magnesium1}").toString()
-                            , params.get("${barium1}").toString()
-                            , params.get("${kalium1}").toString()
-                            , params.get("${manganese1}").toString()
-                            , params.get("${strontium1}").toString()
-                            , params.get("${fluorine1}").toString()
-                            , params.get("${chlorine1}").toString()
-                            , params.get("${bromine1}").toString()
-                            , params.get("${calcium1}").toString()
-                            , params.get("${sulfate1}").toString()
-                            , params.get("${nitrate1}").toString()
-                            , params.get("${phosphate1}").toString()
-                            , params.get("${bicarbonate1}").toString()
-                            , params.get("${ironTotal1}").toString()
-                            , params.get("${ferricIon1}").toString()
-                            , params.get("${ferrous1}").toString()
-                            , params.get("${temperature1}").toString()
-                            , params.get("${ph1}").toString()
-                            , params.get("${influentFlow1}").toString()
-                            , params.get("${recoveryRate1}").toString()
-                            , params.get("${chemicalOxygenDemand1}").toString()
-                            , params.get("${siltDensityIndex1}").toString()
-                            , params.get("${totalBacteriaCount1}").toString());
-
-
-                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-                    buildFunctionTable(document
-                            , params.get("${cfrfValue1}").toString()
-                            , params.get("${cipValue1}").toString()
-                            , params.get("${ocfValue1}").toString());
-                }
-
-                //N3108表单
-                if (params.containsKey("${aluminum2}")) {
-                    buildParagraph(document, "N3108预处理后参数内容", fontBlack);
-
-                    buildWaterTableHBS(document
-                            , params.get("${aluminum2}").toString()
-                            , params.get("${silica2}").toString()
-                            , params.get("${sodium2}").toString()
-                            , params.get("${magnesium2}").toString()
-                            , params.get("${barium2}").toString()
-                            , params.get("${kalium2}").toString()
-                            , params.get("${manganese2}").toString()
-                            , params.get("${strontium2}").toString()
-                            , params.get("${fluorine2}").toString()
-                            , params.get("${chlorine2}").toString()
-                            , params.get("${bromine2}").toString()
-                            , params.get("${calcium2}").toString()
-                            , params.get("${sulfate2}").toString()
-                            , params.get("${nitrate2}").toString()
-                            , params.get("${phosphate2}").toString()
-                            , params.get("${bicarbonate2}").toString()
-                            , params.get("${ironTotal2}").toString()
-                            , params.get("${ferricIon2}").toString()
-                            , params.get("${ferrous2}").toString()
-                            , params.get("${temperature2}").toString()
-                            , params.get("${ph2}").toString()
-                            , params.get("${influentFlow2}").toString()
-                            , params.get("${recoveryRate2}").toString()
-                            , params.get("${chemicalOxygenDemand2}").toString()
-                            , params.get("${siltDensityIndex2}").toString()
-                            , params.get("${totalBacteriaCount2}").toString());
-
-                    buildTitle(document, "系统性能", "反渗透系统运行性能情况见下：");
-
-                    buildFunctionTable(document
-                            , params.get("${cfrfValue2}").toString()
-                            , params.get("${cipValue2}").toString()
-                            , params.get("${ocfValue2}").toString());
-                }
-            }
-
-
-            document.newPage();
-
-            buildTitle(document, "解决方案", "基于对回用系统水质和运行性能的了解，对该系统进行诊断，推荐以下方案：");
-
-            if (params.containsKey("${heavy_desilication_flag}")) {
-                buildParagraph(document, "除硅预处理推荐方案内容", fontBlack);
-
-                buildDesilicationTable(document
-                        , params.containsKey("${heroSuggestions}") ? params.get("${heroSuggestions}").toString() : null
-                        , params.containsKey("${n1998SISuggestions}") ? params.get("${n1998SISuggestions}").toString() : null
-                        , params.get("${n1998SIProductName}").toString()
-                        , params.get("${n1998SIProductValue}").toString()
-                        , params.get("${n1998SIAddingPlace}").toString()
-                        , params.get("${n1998SIAddingType}").toString()
-                        , params.get("${sludgeGenerationName}").toString()
-                        , params.get("${sludgeGenerationValue}").toString()
-                        , params.get("${sludgeGenerationUse}").toString()
-                        , params.get("${sludgeGenerationExplain}").toString()
-                        , params.get("${extraCausticNeededName}").toString()
-                        , params.get("${extraCausticNeededValue}").toString()
-                        , params.get("${extraCausticNeededUse}").toString()
-                        , params.get("${extraCausticNeededExplain}").toString());
-            }
-            if (params.containsKey("${heavy_N3108_flag}")) {
-                buildParagraph(document, "N3108预处理推荐方案内容", fontBlack);
-
-                buildN3108Table(document
-                        , params.get("${n3108ProductName}").toString()
-                        , params.get("${n3108Value}").toString()
-                        , params.get("${n3108AddingPlace}").toString()
-                        , params.get("${n3108AddingType}").toString());
-            }
-            if (params.containsKey("${heavy_product_flag}")) {
-                buildParagraph(document, "杀菌剂推荐方案内容", fontBlack);
-
-                buildProgramTable(document, tableMap.get("heavy_product_table"));
-            }
-            if (params.containsKey("${heavy_scale_inhibitor_flag}")) {
-                buildParagraph(document, "阻垢剂推荐方案内容", fontBlack);
-
-                buildScaleInhibitorTable(document
-                        , params.get("${feedCalciteSrValue}") == null ? "" : params.get("${feedCalciteSrValue}").toString()
-                        , params.get("${feedLSIValue}") == null ? "" : params.get("${feedLSIValue}").toString()
-                        , params.get("${concentrationfactorValue}") == null ? "" : params.get("${concentrationfactorValue}").toString()
-                        , params.get("${pHValue}") == null ? "" : params.get("${pHValue}").toString()
-                        , params.get("${calciteSRValue}") == null ? "" : params.get("${calciteSRValue}").toString()
-                        , params.get("${concentrateLSIValue}") == null ? "" : params.get("${concentrateLSIValue}").toString()
-                        , params.get("${caValue}") == null ? "" : params.get("${caValue}").toString()
-                        , params.get("${siO2Value}") == null ? "" : params.get("${siO2Value}").toString()
-                        , params.get("${mgValue}") == null ? "" : params.get("${mgValue}").toString()
-                        , tableMap.get("heavy_scale_inhibitor_table"));
-            }
-
-            if (params.containsKey("${heavy_msg_flag}")) {
-                buildParagraph(document, params.get("${heavy_msg_flag}").toString(), fontBlack);
-            }
-
+            /**
+             * 委托日期：2023-01-01
+             */
+            PdfPTable table2 = new PdfPTable(new float[]{40});
+            //创建第一列
+            PdfPCell table2Cell1 = new PdfPCell();
+            //隐藏边框
+            table2Cell1.disableBorderSide(15);
+            //设置列高
+            table2Cell1.setFixedHeight(36);
+            //上下居中
+            table2Cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            //添加背景色，蓝色
+            table2Cell1.setBackgroundColor(colorBlue);
+            //添加文本，字体白色/18号/加粗
+            table2Cell1.setPhrase(new Phrase("委托日期：2023-01-01", titleFontWrite));
+            table2.addCell(table2Cell1);
+            document.add(table2);
         }
     }
 

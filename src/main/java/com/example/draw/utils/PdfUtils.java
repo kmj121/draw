@@ -52,6 +52,8 @@ public abstract class PdfUtils {
     //表格加粗蓝字
     protected static Font tableFontBlueBlob = new Font(getBaseFont(), 10, Font.BOLD, colorBlue);
 
+    protected static Font titleFont1 = new Font(getBaseFont(), 18, Font.BOLD, colorBlue);
+
 
     public static BaseFont getBaseFont() {
         if (baseFont != null) {
@@ -71,6 +73,8 @@ public abstract class PdfUtils {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
         document.open();
+        PdfHeaderFooterEvent event = new PdfHeaderFooterEvent();
+        writer.setPageEvent(event);
         this.generatePDF(document, params, tableList);
         document.close();
         writer.close();

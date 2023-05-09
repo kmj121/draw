@@ -13,17 +13,17 @@ public class WordService {
 
     public void test(ReportData data) throws Exception {
         //创建word文档
-//        String wordFileName = "word1.docx";
+        String wordFileName = "word1.docx";
         //创建pdf文档
         String pdfFileName = "pdf1.pdf";
 
-        buildWord("", pdfFileName, data);
+        buildWord(wordFileName, pdfFileName, data);
     }
 
     /**
      * 生成word以及pdf文件
      */
     public void buildWord(String wordFilePath, String pdfFilePath, ReportData data)throws Exception {
-        BuildUtils.buildProgram(data, "", attachFolder + pdfFilePath);
+        BuildUtils.buildProgram(data, attachFolder + wordFilePath, attachFolder + pdfFilePath);
     }
 }

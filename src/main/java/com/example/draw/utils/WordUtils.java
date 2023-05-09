@@ -38,12 +38,16 @@ public abstract class WordUtils {
     protected static String colorGreen = "70af47";
     //红色
     protected static String colorRed = "ff0000";
+    // 粉色
+    protected static String colorPink = "ffe5e5";
+    // 浅蓝色
+    protected static String colorBlue2 = "cce0ff";
 
 
     private static Logger logger = LoggerFactory.getLogger(WordUtils.class);
 
 
-    public void buildWord(String filePath, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws IOException, DocumentException, InvalidFormatException, URISyntaxException {
+    public void buildWord(String filePath, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws Exception {
         FileOutputStream out = null;
         XWPFDocument document = new XWPFDocument();
         try {
@@ -71,7 +75,7 @@ public abstract class WordUtils {
      * @throws URISyntaxException
      * @throws DocumentException
      */
-    public abstract void generateWord(XWPFDocument document, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws IOException, InvalidFormatException, URISyntaxException, DocumentException;
+    public abstract void generateWord(XWPFDocument document, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws Exception;
 
     /**
      * 构建主标题部分
@@ -224,6 +228,7 @@ public abstract class WordUtils {
         if (CollectionUtils.isNotEmpty(foot)) {
             rowNum++;
         }
+        System.out.println("rowNum=" + rowNum + ", columnNum=" + columnNum);
         XWPFTable xwpfTable = document.createTable(rowNum, columnNum);
         //表格居中显示
         CTTblPr ctTblPr = xwpfTable.getCTTbl().addNewTblPr();

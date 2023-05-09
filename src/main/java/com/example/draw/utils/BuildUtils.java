@@ -19,12 +19,12 @@ public class BuildUtils {
         Map<String, List<List<String>>> tableMap = new HashMap<>();
 
         //word
-//        ProgramsWordUtils programsWordUtils = new ProgramsWordUtils();
-//        programsWordUtils.buildWord(fileNameWord, dataMap, tableMap);
+        ProgramsWordUtils programsWordUtils = new ProgramsWordUtils();
+        programsWordUtils.buildWord(fileNameWord, dataMap, tableMap);
 
         //pdf
-        ProgramsPdfUtils programsPdfUtils = new ProgramsPdfUtils();
-        programsPdfUtils.buildPdf(fileNamePdf, dataMap, tableMap);
+//        ProgramsPdfUtils programsPdfUtils = new ProgramsPdfUtils();
+//        programsPdfUtils.buildPdf(fileNamePdf, dataMap, tableMap);
 
     }
 }

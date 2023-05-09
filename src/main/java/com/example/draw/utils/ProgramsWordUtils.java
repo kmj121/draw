@@ -1,22 +1,17 @@
 package com.example.draw.utils;
 
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.Internal;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.*;
-import org.apache.xmlbeans.XmlException;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -34,26 +29,32 @@ public class ProgramsWordUtils extends WordUtils {
     @Override
     public void generateWord(XWPFDocument document, Map<String, Object> params, Map<String, List<List<String>>> tableMap) throws Exception {
         // 页眉页脚
-        createHeaderAndFooter(document);
+        createHeaderAndFooterSpecial(document);
 
         // 报告封面
         buildHomePage(document);
 
+        // 下一页
+        pageBreakSpecial(document);
+
+        // 委托信息 / 报告概览
+//        buildWTXXAndBGGL(document);
+
         // 标题
-        buildTitle(document, " 委托信息 / 报告概要");
+//        buildTitleSpecial(document, " 委托信息 / 报告概要");
 
         // 候选人、委托日期等信息的表格
-        buildMainTable(document);
+        buildWTXXAndBGGL(document);
 
 //        buildTitleTable(document, "方案建议书");
 
-        for (int i = 0; i <= 20; i++) {
-            buildMainTable(document
-                    , "111"
-                    , "222"
-                    , "333"
-                    , "444");
-        }
+//        for (int i = 0; i <= 20; i++) {
+//            buildMainTable(document
+//                    , "111"
+//                    , "222"
+//                    , "333"
+//                    , "444");
+//        }
 
 
 //        if (params.containsKey("${lightFlag}")) {
@@ -461,51 +462,129 @@ public class ProgramsWordUtils extends WordUtils {
     }
 
     /**
-     * 候选人、委托日期等信息的表格
+     * 委托信息 / 报告概览
+     * @param document
      */
-    public void buildMainTable(XWPFDocument document) throws InvalidFormatException, IOException, URISyntaxException {
+    public void buildWTXXAndBGGL(XWPFDocument document) throws IOException, URISyntaxException, InvalidFormatException {
+        // 标题
+        buildTitleSpecial(document, " 委托信息 / 报告概览");
+
+        // 空一行
         blankParagraph(document);
 
-        XWPFTable table = document.createTable(2, 5);
+        // 候选人、委托日期等信息的表格
+        buildWTXXAndBGGLMainTable(document);
 
-        //设置表格宽度
-        CTTblPr tablePr = table.getCTTbl().addNewTblPr();
-        //表格宽度
-        CTTblWidth tableWidth = tablePr.addNewTblW();
-        tableWidth.setW(BigInteger.valueOf(8310));
-        //设置表格宽度为非自动
-        tableWidth.setType(STTblWidth.DXA);
-        //设置边框
-        displayBorder(table);
+        // 空一行
+        blankParagraph(document);
 
+        // 红黄蓝绿灯表格
+        List<Object> strings = new ArrayList<>();
+        strings.add("");
+        strings.add(new StringBuffer("/static/image/red.jpeg"));
+        strings.add("高风险");
+        strings.add(new StringBuffer("/static/image/yellow.jpeg"));
+        strings.add("一般风险");
+        strings.add("");
+        strings.add(new StringBuffer("/static/image/blue.jpeg"));
+        strings.add("低风险/无法核实");
+        strings.add(new StringBuffer("/static/image/green.jpeg"));
+        strings.add("无风险");
+        List<List<Object>> content = new ArrayList<>();
+        content.add(strings);
+        // 总长度8310 一半4155 第一列空格 55 第二列 340 第三列 1000 第四列710 总共4155， 后续。。。
+        buildTableSpecial(document, null, content,10, new Long[]{55L, 340L, 1710L, 340L, 1710L, 55L, 340L, 1710L, 340L, 1710L}, 400, 8310L, 2, null, null, colorBlack, 8, false, ParagraphAlignment.LEFT);
 
-        XWPFTableRow xwpfTableRow1 = table.getRow(0);
-        XWPFTableCell cell11 = xwpfTableRow1.getCell(0);
-        builderCell(cell11, "姓  名：", colorGary, ParagraphAlignment.LEFT, 1000, 8, null);
-        XWPFTableCell cell12 = xwpfTableRow1.getCell(1);
-        builderCell(cell12, "张三", colorGary, ParagraphAlignment.LEFT, 3000, 8, null);
-        XWPFTableCell cell13 = xwpfTableRow1.getCell(2);
-        builderCell(cell13, "", colorWrite, ParagraphAlignment.LEFT, 310, 8, null);
-        XWPFTableCell cell14 = xwpfTableRow1.getCell(3);
-        builderCell(cell14, "委托日期：", colorPink, ParagraphAlignment.LEFT, 1000, 8, null);
-        XWPFTableCell cell15 = xwpfTableRow1.getCell(4);
-        builderCell(cell15, "2023年1月1日", colorPink, ParagraphAlignment.LEFT, 3000, 8, null);
+        // 空一行
+        blankParagraph(document);
 
+        // todo 报告概览表格
 
-        XWPFTableRow xwpfTableRow2 = table.getRow(1);
-        XWPFTableCell cell21 = xwpfTableRow2.getCell(0);
-        builderCell(cell21, "交付类型：", colorGary, ParagraphAlignment.LEFT, 1000, 8, null);
-        XWPFTableCell cell22 = xwpfTableRow2.getCell(1);
-        builderCell(cell22, "终版报告", colorGary, ParagraphAlignment.LEFT, 3000, 8, null);
-        XWPFTableCell cell23 = xwpfTableRow2.getCell(2);
-        builderCell(cell23, "", colorWrite, ParagraphAlignment.LEFT, 310, 8, null);
-        XWPFTableCell cell24 = xwpfTableRow2.getCell(3);
-        builderCell(cell24, "交付日期：", colorPink, ParagraphAlignment.LEFT, 1000, 8, null);
-        XWPFTableCell cell25 = xwpfTableRow2.getCell(4);
-        builderCell(cell25, "2023年1月3日", colorPink, ParagraphAlignment.LEFT, 3000, 8, null);
+        // 风险说明表格1-红灯部分
+        // 风险说明表格2-黄灯部分
+        List<Object> strings2_1 = new ArrayList<>();
+        strings2_1.add("高风险\r\nddafjdsaljl\r\nhfdosajfdowsa\r\n");
+        strings2_1.add("");
+        strings2_1.add(new StringBuffer("/static/image/yellow.jpeg"));
+        List<List<Object>> content2 = new ArrayList<>();
+        content2.add(strings2_1);
+        // 总长度8310 一半4155 第一列空格 55 第二列 340 第三列 1000 第四列710 总共4155， 后续。。。
+        buildTableSpecial(document, null, content2,3, new Long[]{7810L, 500L, 500L}, 1000, 8310L, 0, null, colorOrange, colorBlack, 8, false, ParagraphAlignment.LEFT);
+        // 风险说明表格3-蓝灯部分
+
+    }
+
+    /**
+     * 候选人、委托日期等信息的表格
+     */
+    public void buildWTXXAndBGGLMainTable(XWPFDocument document) throws InvalidFormatException, IOException, URISyntaxException {
+//        blankParagraph(document);
+//
+//        XWPFTable table = document.createTable(2, 5);
+//
+//        //设置表格宽度
+//        CTTblPr tablePr = table.getCTTbl().addNewTblPr();
+//        //表格宽度
+//        CTTblWidth tableWidth = tablePr.addNewTblW();
+//        tableWidth.setW(BigInteger.valueOf(8310));
+//        //设置表格宽度为非自动
+//        tableWidth.setType(STTblWidth.DXA);
+//        //设置边框
+//        displayBorder(table);
+//
+//
+//        XWPFTableRow xwpfTableRow1 = table.getRow(0);
+//        XWPFTableCell cell11 = xwpfTableRow1.getCell(0);
+//        builderCell(cell11, "姓  名：", colorGary, ParagraphAlignment.LEFT, 1000, 8, null);
+//        XWPFTableCell cell12 = xwpfTableRow1.getCell(1);
+//        builderCell(cell12, "张三", colorGary, ParagraphAlignment.LEFT, 3000, 8, null);
+//        XWPFTableCell cell13 = xwpfTableRow1.getCell(2);
+//        builderCell(cell13, "", colorWrite, ParagraphAlignment.LEFT, 310, 8, null);
+//        XWPFTableCell cell14 = xwpfTableRow1.getCell(3);
+//        builderCell(cell14, "委托日期：", colorPink, ParagraphAlignment.LEFT, 1000, 8, null);
+//        XWPFTableCell cell15 = xwpfTableRow1.getCell(4);
+//        builderCell(cell15, "2023年1月1日", colorPink, ParagraphAlignment.LEFT, 3000, 8, null);
+//
+//
+//        XWPFTableRow xwpfTableRow2 = table.getRow(1);
+//        XWPFTableCell cell21 = xwpfTableRow2.getCell(0);
+//        builderCell(cell21, "交付类型：", colorGary, ParagraphAlignment.LEFT, 1000, 8, null);
+//        XWPFTableCell cell22 = xwpfTableRow2.getCell(1);
+//        builderCell(cell22, "终版报告", colorGary, ParagraphAlignment.LEFT, 3000, 8, null);
+//        XWPFTableCell cell23 = xwpfTableRow2.getCell(2);
+//        builderCell(cell23, "", colorWrite, ParagraphAlignment.LEFT, 310, 8, null);
+//        XWPFTableCell cell24 = xwpfTableRow2.getCell(3);
+//        builderCell(cell24, "交付日期：", colorPink, ParagraphAlignment.LEFT, 1000, 8, null);
+//        XWPFTableCell cell25 = xwpfTableRow2.getCell(4);
+//        builderCell(cell25, "2023年1月3日", colorPink, ParagraphAlignment.LEFT, 3000, 8, null);
 
 //        XWPFTableRow xwpfTableRow3 = table.getRow(2);
-
+        List<Object> strings1 = new ArrayList<>();
+        strings1.add("  姓  名：");
+        strings1.add("张三");
+        strings1.add("");
+        strings1.add("  委托日期：");
+        strings1.add("2023年1月1日");
+        strings1.add("");
+        List<Object> strings2 = new ArrayList<>();
+        strings2.add("  证件号码：");
+        strings2.add("340123199899990000");
+        strings2.add("");
+        strings2.add("  交付日期：");
+        strings2.add("2023年1月3日");
+        strings2.add("");
+        List<Object> strings3 = new ArrayList<>();
+        strings3.add("  交付类型：");
+        strings3.add("终版报告");
+        strings3.add("");
+        strings3.add("  风险等级：");
+        strings3.add(new StringBuffer("/static/image/yellow.jpeg"));
+        strings3.add("");
+        List<List<Object>> content = new ArrayList<>();
+        content.add(strings1);
+        content.add(strings2);
+        content.add(strings3);
+        buildTableSpecial3(document, null, content,6, new Long[]{1200L, 2500L, 310L, 1200L, 2500L, 600L}, 400, 8310L, true, null, null, 8, true);
     }
 
     public void builderCell(XWPFTableCell cell, String content, String backgroundColor, ParagraphAlignment paragraphAlign, Integer width, Integer fontSize, String filePath) throws IOException, InvalidFormatException, URISyntaxException {
@@ -555,9 +634,9 @@ public class ProgramsWordUtils extends WordUtils {
         /**
          * 雇前背景调查报告
          */
-        List<List<String>> content = new ArrayList<>();
+        List<List<Object>> content = new ArrayList<>();
         content.add(Arrays.asList("雇 前 背 景 调 查 报 告"));
-        buildTableSpecial(document, null, content,1, new Long[]{8310L}, new Integer[]{600}, 8130L, true, null, null, colorBlue, 28, true);
+        buildTableSpecial(document, null, content,1, new Long[]{8310L}, 600, 8130L, 0, null, null, colorBlue, 28, true, ParagraphAlignment.CENTER);
 
         // 空一行
         blankParagraph(document);
@@ -565,52 +644,107 @@ public class ProgramsWordUtils extends WordUtils {
         /**
          * 委托日期
          */
-        List<List<String>> content2 = new ArrayList<>();
+        List<List<Object>> content2 = new ArrayList<>();
         content2.add(Arrays.asList("委托日期：2023-01-01"));
         // 背景色 浅蓝色
-        buildTableSpecial(document, null, content2,1, new Long[]{4000L}, new Integer[]{400}, 4000L, true, null, colorBlue2, colorWrite, 14, true);
+        buildTableSpecial(document, null, content2,1, new Long[]{4000L}, 400, 4000L, 0, null, colorBlue2, colorWrite, 14, true, ParagraphAlignment.CENTER);
 
         // 空一行
         blankParagraph(document);
         /**
          * 公司名称、委托方名称、报告编号
          */
-        List<String> strings1 = new ArrayList<>();
+        List<Object> strings1 = new ArrayList<>();
         strings1.add("北京字节跳动网络技术有限公司");
-        List<String> strings2 = new ArrayList<>();
+        List<Object> strings2 = new ArrayList<>();
         strings2.add("张三");
-        List<String> strings3 = new ArrayList<>();
+        List<Object> strings3 = new ArrayList<>();
         strings3.add("报告编号：BJDC20230101000001");
-        List<List<String>> content3 = new ArrayList();
+        List<List<Object>> content3 = new ArrayList();
         content3.add(strings1);
         content3.add(strings2);
         content3.add(strings3);
-        buildTableSpecial(document, null, content3,1, new Long[]{8310L}, new Integer[]{400, 400, 400}, 8310L, true, null, null, colorBlack, 14, false);
+        buildTableSpecial(document, null, content3,1, new Long[]{8310L}, 400, 8310L, 0, null, null, colorBlack, 14, false, ParagraphAlignment.CENTER);
 
         /**
          * 内部保密文件
          */
 
-        List<List<String>> content4 = new ArrayList<>();
+        List<List<Object>> content4 = new ArrayList<>();
         content4.add(Arrays.asList("<内部保密文件>"));
-        buildTableSpecial(document, null, content4,1, new Long[]{8310L}, new Integer[]{600}, 8310L, true, null, null, colorRed, 12, false);
+        buildTableSpecial(document, null, content4,1, new Long[]{8310L}, 500, 8310L, 0, null, null, colorRed, 12, false, ParagraphAlignment.CENTER);
 
         /**
          * L4级机密、禁止分享、限期删除
          */
-        List<String> stringList = new ArrayList<>();
-        stringList.add("");
-        stringList.add("L4级机密");
-        stringList.add("");
-        stringList.add("禁止分享");
-        stringList.add("");
-        stringList.add("限期删除");
-        stringList.add("");
-        List<List<String>> content5 = new ArrayList();
-        content5.add(stringList);
+        List<Object> list = new ArrayList<>();
+        list.add("");
+        list.add(new StringBuffer("/static/image/1-L4级机密.jpeg"));
+        list.add("L4级机密");
+        list.add("");
+        list.add(new StringBuffer("/static/image/2-禁止分享.jpeg"));
+        list.add("禁止分享");
+        list.add("");
+        list.add(new StringBuffer("/static/image/2-禁止分享.jpeg"));
+        list.add("限期删除");
+        list.add("");
+        List<List<Object>> content5 = new ArrayList();
+        content5.add(list);
 //        buildTable(document, null, null, content, 3, new Long[]{800L, 800L, 800L}, 2400L);
-        buildTableSpecial2(document, null, content5,7, new Long[]{1655L, 1400L, 400L, 1400L, 400L, 1400L, 1655L}, new Integer[]{200}, 8310L, true, null, colorPink, colorRed, 10, true);
+        buildTableSpecial2(document, null, content5,10, new Long[]{1655L, 300L, 1100L, 400L, 300L, 1100L, 400L, 300L, 1100L, 1655L}, 200, 8310L, true, null, colorPink, colorRed, 10, true);
 
+    }
+
+    /**
+     * 分页
+     *
+     * @param document
+     */
+    public void pageBreakSpecial(XWPFDocument document) {
+        XWPFParagraph p = document.createParagraph();
+        p.setPageBreak(true);
+    }
+
+    /**
+     * word跨列并单元格
+     *
+     * @param table
+     * @param row
+     * @param fromCell
+     * @param toCell
+     */
+    public void mergeCellsHorizontalSpecial(XWPFTable table, int row, int fromCell, int toCell) {
+        for (int cellIndex = fromCell; cellIndex <= toCell; cellIndex++) {
+            XWPFTableCell cell = table.getRow(row).getCell(cellIndex);
+            if (cellIndex == fromCell) {
+                // The first merged cell is set with RESTART merge value
+                cell.getCTTc().addNewTcPr().addNewHMerge().setVal(STMerge.RESTART);
+            } else {
+                // Cells which join (merge) the first one, are set with CONTINUE
+                cell.getCTTc().addNewTcPr().addNewHMerge().setVal(STMerge.CONTINUE);
+            }
+        }
+    }
+
+    /**
+     * word跨行并单元格
+     *
+     * @param table
+     * @param col
+     * @param fromRow
+     * @param toRow
+     */
+    public void mergeCellsVerticallySpecial(XWPFTable table, int col, int fromRow, int toRow) {
+        for (int rowIndex = fromRow; rowIndex <= toRow; rowIndex++) {
+            XWPFTableCell cell = table.getRow(rowIndex).getCell(col);
+            if (rowIndex == fromRow) {
+                // The first merged cell is set with RESTART merge value
+                cell.getCTTc().addNewTcPr().addNewVMerge().setVal(STMerge.RESTART);
+            } else {
+                // Cells which join (merge) the first one, are set with CONTINUE
+                cell.getCTTc().addNewTcPr().addNewVMerge().setVal(STMerge.CONTINUE);
+            }
+        }
     }
 
     /**
@@ -622,29 +756,31 @@ public class ProgramsWordUtils extends WordUtils {
      * @param tableWidths 数组类型，表格每列的宽度
      * @param rowsHeight 数组类型，表格每行的宽度
      * @param tableWidth 表格宽度
-     * @param displayBorder 是否隐藏边框 true为隐藏
+     * @param displayBorder 是否隐藏边框 0:不展示，1：展示，2：自定义边框（上下左右有边框）
      * @param titleBackground 表格标题背景色
      * @param tableBackground 表格背景色
      * @param wordColor 字体颜色
      * @param fontSize 字体大小
      * @param bold 字体是否加粗
+     * @param align 对齐方式
      * @throws InvalidFormatException
      * @throws IOException
      * @throws URISyntaxException
      */
     public void buildTableSpecial(XWPFDocument document
             , List<String> title
-            , List<List<String>> content
+            , List<List<Object>> content
             , Integer numColumn
             , Long[] tableWidths
-            , Integer[] rowsHeight
+            , Integer rowsHeight
             , Long tableWidth
-            , Boolean displayBorder
+            , Integer displayBorder
             , String titleBackground
             , String tableBackground
             , String wordColor
             , Integer fontSize
-            , Boolean bold) throws InvalidFormatException, IOException, URISyntaxException {
+            , Boolean bold
+            , ParagraphAlignment align) throws InvalidFormatException, IOException, URISyntaxException {
         int rowNum = content.size();
         int columnNum = numColumn == null ? tableWidths.length : numColumn;
         if (CollectionUtils.isNotEmpty(title)) {
@@ -661,9 +797,12 @@ public class ProgramsWordUtils extends WordUtils {
         //设置表格宽度为非自动
         ctTblWidth.setType(STTblWidth.DXA);
         Long cellWidth = null;
-        if (displayBorder) {
-            // 设置无边框
+        //设置边框
+        if (displayBorder == 0) {
             displayBorder(xwpfTable);
+        } else if(displayBorder == 2) {
+            // 自定义边框：上下左右有灰色边框
+            customizeBorderSpecial(xwpfTable, colorGary);
         }
 
         //创建标题
@@ -671,7 +810,7 @@ public class ProgramsWordUtils extends WordUtils {
             //标题行对象
             XWPFTableRow xwpfTableRowTitle = xwpfTable.getRow(0);
             //标题行高
-            xwpfTableRowTitle.setHeight(rowsHeight[0]);
+            xwpfTableRowTitle.setHeight(rowsHeight);
             for (int i = 0; i < title.size() && i < columnNum; i++) {
                 if (tableWidths != null) {
                     cellWidth = tableWidths[i];
@@ -680,7 +819,7 @@ public class ProgramsWordUtils extends WordUtils {
                 //单元格对象
                 XWPFTableCell xwpfTableCell = xwpfTableRowTitle.getCell(i);
                 //添加文本，9号/黑体/黑色/居中
-                buildCellSpecial(xwpfTableCell, msg, 9, true, colorBlack, ParagraphAlignment.CENTER, cellWidth, null, titleBackground);
+                buildCellSpecial(xwpfTableCell, msg, 9, true, colorBlack, align, cellWidth, null, titleBackground);
                 // todo 添加边框
 //                addBottomBorder(xwpfTableCell, 1, colorBlue, true);
             }
@@ -694,23 +833,20 @@ public class ProgramsWordUtils extends WordUtils {
                 // 行对象
                 xwpfTableRow = xwpfTable.getRow(j + 1);
                 //行高
-                xwpfTableRow.setHeight(rowsHeight[j + 1]);
+                xwpfTableRow.setHeight(rowsHeight);
             } else {
                 // 行对象
                 xwpfTableRow = xwpfTable.getRow(j);
                 //行高
-                xwpfTableRow.setHeight(rowsHeight[j]);
+                xwpfTableRow.setHeight(rowsHeight);
             }
-            List<String> row = content.get(j);
+            List<Object> row = content.get(j);
             for (int i = 0; i < row.size() && i < columnNum; i++) {
                 //单元格对象
                 XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(i);
                 if (tableWidths != null) {
                     cellWidth = tableWidths[i];
                 }
-                //黑字 居中
-//                String wordColor = colorBlack;
-                ParagraphAlignment align = ParagraphAlignment.CENTER;
                 //添加文本，14号/黑体/左对齐
                 buildCellSpecial(xwpfTableCell, row.get(i), fontSize, bold, wordColor, align, cellWidth, null, tableBackground);
             }
@@ -738,10 +874,10 @@ public class ProgramsWordUtils extends WordUtils {
      */
     public void buildTableSpecial2(XWPFDocument document
             , List<String> title
-            , List<List<String>> content
+            , List<List<Object>> content
             , Integer numColumn
             , Long[] tableWidths
-            , Integer[] rowsHeight
+            , Integer rowsHeight
             , Long tableWidth
             , Boolean displayBorder
             , String titleBackground
@@ -775,7 +911,7 @@ public class ProgramsWordUtils extends WordUtils {
             //标题行对象
             XWPFTableRow xwpfTableRowTitle = xwpfTable.getRow(0);
             //标题行高
-            xwpfTableRowTitle.setHeight(rowsHeight[0]);
+            xwpfTableRowTitle.setHeight(rowsHeight);
             for (int i = 0; i < title.size() && i < columnNum; i++) {
                 if (tableWidths != null) {
                     cellWidth = tableWidths[i];
@@ -798,14 +934,14 @@ public class ProgramsWordUtils extends WordUtils {
                 // 行对象
                 xwpfTableRow = xwpfTable.getRow(j + 1);
                 //行高
-                xwpfTableRow.setHeight(rowsHeight[j + 1]);
+                xwpfTableRow.setHeight(rowsHeight);
             } else {
                 // 行对象
                 xwpfTableRow = xwpfTable.getRow(j);
                 //行高
-                xwpfTableRow.setHeight(rowsHeight[j]);
+                xwpfTableRow.setHeight(rowsHeight);
             }
-            List<String> row = content.get(j);
+            List<Object> row = content.get(j);
             for (int i = 0; i < row.size() && i < columnNum; i++) {
                 //单元格对象
                 XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(i);
@@ -815,7 +951,7 @@ public class ProgramsWordUtils extends WordUtils {
                 //黑字 居中
 //                String wordColor = colorBlack;
                 ParagraphAlignment align = ParagraphAlignment.CENTER;
-                if (i % 2 == 1) {
+                if (i == 2 || i == 5 || i == 8) {
                     buildCellSpecial(xwpfTableCell, row.get(i), fontSize, bold, wordColor, align, cellWidth, null, tableBackground);
                 } else {
                     buildCellSpecial(xwpfTableCell, row.get(i), fontSize, bold, wordColor, align, cellWidth, null, null);
@@ -823,6 +959,159 @@ public class ProgramsWordUtils extends WordUtils {
             }
         }
     }
+
+    /**
+     * 委托信息 / 报告概览
+     * @param document
+     * @param title
+     * @param content
+     * @param numColumn
+     * @param tableWidths
+     * @param rowsHeight
+     * @param tableWidth
+     * @param displayBorder
+     * @param titleBackground
+     * @param wordColor
+     * @param fontSize
+     * @param bold
+     * @throws InvalidFormatException
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public void buildTableSpecial3(XWPFDocument document
+            , List<String> title
+            , List<List<Object>> content
+            , Integer numColumn
+            , Long[] tableWidths
+            , Integer rowsHeight
+            , Long tableWidth
+            , Boolean displayBorder
+            , String titleBackground
+            , String wordColor
+            , Integer fontSize
+            , Boolean bold) throws InvalidFormatException, IOException, URISyntaxException {
+        int rowNum = content.size();
+        int columnNum = numColumn == null ? tableWidths.length : numColumn;
+        if (CollectionUtils.isNotEmpty(title)) {
+            rowNum++;
+        }
+        System.out.println("rowNum=" + rowNum + ", columnNum=" + columnNum);
+        XWPFTable xwpfTable = document.createTable(rowNum, columnNum);
+        //表格居中显示
+        CTTblPr ctTblPr = xwpfTable.getCTTbl().addNewTblPr();
+        ctTblPr.addNewJc().setVal(STJc.CENTER);
+        //设置表格宽度
+        CTTblWidth ctTblWidth = ctTblPr.addNewTblW();
+        ctTblWidth.setW(BigInteger.valueOf(tableWidth));
+        //设置表格宽度为非自动
+        ctTblWidth.setType(STTblWidth.DXA);
+        Long cellWidth = null;
+        if (displayBorder) {
+            // 设置无边框
+            displayBorder(xwpfTable);
+        }
+
+        //创建标题
+        if (CollectionUtils.isNotEmpty(title)) {
+            //标题行对象
+            XWPFTableRow xwpfTableRowTitle = xwpfTable.getRow(0);
+            //标题行高
+            xwpfTableRowTitle.setHeight(rowsHeight);
+            for (int i = 0; i < title.size() && i < columnNum; i++) {
+                if (tableWidths != null) {
+                    cellWidth = tableWidths[i];
+                }
+                String msg = title.get(i);
+                //单元格对象
+                XWPFTableCell xwpfTableCell = xwpfTableRowTitle.getCell(i);
+                //添加文本，9号/黑体/黑色/居中
+                buildCellSpecial(xwpfTableCell, msg, 9, true, colorBlack, ParagraphAlignment.CENTER, cellWidth, null, titleBackground);
+                // todo 添加边框
+//                addBottomBorder(xwpfTableCell, 1, colorBlue, true);
+            }
+        }
+
+        //创建内容
+        for (int j = 0; j < content.size(); j++) {
+            //有标题时和无标题时取值位置不同
+            XWPFTableRow xwpfTableRow;
+            if (CollectionUtils.isNotEmpty(title)) {
+                // 行对象
+                xwpfTableRow = xwpfTable.getRow(j + 1);
+                //行高
+                xwpfTableRow.setHeight(rowsHeight);
+            } else {
+                // 行对象
+                xwpfTableRow = xwpfTable.getRow(j);
+                //行高
+                xwpfTableRow.setHeight(rowsHeight);
+            }
+            List<Object> row = content.get(j);
+            for (int i = 0; i < row.size() && i < columnNum; i++) {
+                //单元格对象
+                XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(i);
+                if (tableWidths != null) {
+                    cellWidth = tableWidths[i];
+                }
+                //居左
+                ParagraphAlignment align = ParagraphAlignment.LEFT;
+
+                // 添加背景色
+                String background = "";
+                if (i == 0 || i == 1) {
+                    background = colorGary;
+                } else if (i == 3 || i == 4) {
+                    background = colorPink;
+                } else {
+                    background = null;
+                }
+                buildCellSpecial(xwpfTableCell, row.get(i), fontSize, bold, wordColor, align, cellWidth, null, background);
+            }
+        }
+    }
+
+    /**
+     * 自定义边框
+     * 隐藏内部边框
+     *
+     * @param table
+     */
+    public void customizeBorderSpecial(XWPFTable table, String color) {
+        CTTblBorders ctTblBorders = table.getCTTbl().getTblPr().addNewTblBorders();
+
+        CTBorder leftBorder = ctTblBorders.addNewLeft();
+        leftBorder.setVal(STBorder.THICK);
+        leftBorder.setSz(BigInteger.valueOf(10L));
+        leftBorder.setColor(color);
+        ctTblBorders.setLeft(leftBorder);
+
+        CTBorder rBorder = ctTblBorders.addNewRight();
+        rBorder.setVal(STBorder.THICK);
+        rBorder.setSz(BigInteger.valueOf(10L));
+        rBorder.setColor(color);
+        ctTblBorders.setRight(rBorder);
+
+        CTBorder tBorder = ctTblBorders.addNewTop();
+        tBorder.setVal(STBorder.THICK);
+        tBorder.setSz(BigInteger.valueOf(10L));
+        tBorder.setColor(color);
+        ctTblBorders.setTop(tBorder);
+
+        CTBorder bBorder = ctTblBorders.addNewBottom();
+        bBorder.setVal(STBorder.THICK);
+        bBorder.setSz(BigInteger.valueOf(10L));
+        bBorder.setColor(color);
+        ctTblBorders.setBottom(bBorder);
+
+        CTBorder vBorder = ctTblBorders.addNewInsideV();
+        vBorder.setVal(STBorder.NIL);
+        ctTblBorders.setInsideV(vBorder);
+
+        CTBorder hBorder = ctTblBorders.addNewInsideH();
+        hBorder.setVal(STBorder.NIL);
+        ctTblBorders.setInsideH(hBorder);
+    }
+
 
     /**
      * 创建单元格 (对象，可以是String也可以是Image,指定字体，水平居...)
@@ -875,7 +1164,7 @@ public class ProgramsWordUtils extends WordUtils {
                 if ("image2.jpg".equals(imageName)) {
                     pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(37.5), Units.toEMU(15));
                 } else {
-                    pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(50), Units.toEMU(50));
+                    pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(18), Units.toEMU(18));
                 }
             } catch (IOException e) {
                 throw e;
@@ -1005,7 +1294,7 @@ public class ProgramsWordUtils extends WordUtils {
     /**
      * 标题
      */
-    public void buildTitle(XWPFDocument document, String titleName) throws IOException, InvalidFormatException, URISyntaxException {
+    public void buildTitleSpecial(XWPFDocument document, String titleName) throws IOException, InvalidFormatException, URISyntaxException {
         XWPFTable table = document.createTable(1, 2);
         //表格居中显示
         CTTblPr ctTblPr = table.getCTTbl().addNewTblPr();
@@ -1052,7 +1341,7 @@ public class ProgramsWordUtils extends WordUtils {
     /**
      * 页眉页脚
      */
-    public static void createHeaderAndFooter( XWPFDocument document) throws Exception {
+    public void createHeaderAndFooterSpecial( XWPFDocument document) throws Exception {
         // 页眉
         // Appends and returns a new empty "sectPr" element
         CTSectPr sectPr = document.getDocument().getBody().addNewSectPr();
@@ -1065,18 +1354,24 @@ public class ProgramsWordUtils extends WordUtils {
         // paragraph.setBorderBottom(Borders.THICK);
         XWPFRun run = paragraph.createRun();
 
-        String imgFile = "/Users/kanmeijie/Workspace/draw/src/main/resources/static/image/image2.jpg";
-        File file = new File( imgFile );
-        InputStream is = new FileInputStream( file );
-        XWPFPicture picture = run.addPicture( is, XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU( 80 ), Units.toEMU( 45 ) );
-        String blipID = "";
-        for( XWPFPictureData picturedata : header.getAllPackagePictures() ) { // 这段必须有，不然打开的logo图片不显示
-            blipID = header.getRelationId( picturedata );
-            picture.getCTPicture().getBlipFill().getBlip().setEmbed( blipID );
+        FileInputStream is = null;
+        try {
+            is = new FileInputStream(new File(this.getClass().getResource("/static/image/image2.jpg").toURI()));
+            XWPFPicture picture = run.addPicture( is, XWPFDocument.PICTURE_TYPE_JPEG, null, Units.toEMU( 80 ), Units.toEMU( 45 ) );
+            String blipID = "";
+            for( XWPFPictureData picturedata : header.getAllPackagePictures() ) { // 这段必须有，不然打开的logo图片不显示
+                blipID = header.getRelationId( picturedata );
+                picture.getCTPicture().getBlipFill().getBlip().setEmbed( blipID );
+            }
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (is != null) {
+                is.close();
+            }
         }
         // 添加tab
         // run.addTab();
-        is.close();
 
         // 页脚
         XWPFFooter footer = headerFooterPolicy.createFooter(XWPFHeaderFooterPolicy.DEFAULT);

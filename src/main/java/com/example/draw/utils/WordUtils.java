@@ -42,6 +42,8 @@ public abstract class WordUtils {
     protected static String colorPink = "ffe5e5";
     // 浅蓝色
     protected static String colorBlue2 = "cce0ff";
+    // 浅橘色
+    protected static String colorOrange = "ffd699";
 
 
     private static Logger logger = LoggerFactory.getLogger(WordUtils.class);

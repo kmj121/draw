@@ -37,7 +37,7 @@ public class ProgramsWordUtils extends WordUtils {
         // 下一页
         pageBreakSpecial(document);
 
-        // 候选人、委托日期等信息的表格
+        // 委托信息/报告概览
         buildWTXXAndBGGL(document);
 
         // 下一页
@@ -191,27 +191,103 @@ public class ProgramsWordUtils extends WordUtils {
         // 空一行
         blankParagraph(document);
 
-        // todo 报告概览表格
+        // 报告概览表格
+        List<String> title = new ArrayList<>();
+        title.add("核实类目");
+        title.add("类目明细");
+        title.add("核实状态");
+        title.add("核实结果");
+        List<Object> strings2_1 = new ArrayList<>();
+        strings2_1.add("身份风险");
+        strings2_1.add("身份基础信息");
+        strings2_1.add("已完成");
+        strings2_1.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_2 = new ArrayList<>();
+        strings2_2.add("社会风险");
+        strings2_2.add("社会不良/关注信息核实");
+        strings2_2.add("已完成");
+        strings2_2.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_3 = new ArrayList<>();
+        strings2_3.add("诉讼风险");
+        strings2_3.add("个人涉诉记录核实");
+        strings2_3.add("已完成");
+        strings2_3.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_4 = new ArrayList<>();
+        strings2_4.add("商业风险");
+        strings2_4.add("中国大陆工商信息核实");
+        strings2_4.add("已完成");
+        strings2_4.add(new StringBuffer("/static/image/yellow.png"));
+        List<Object> strings2_5 = new ArrayList<>();
+        strings2_5.add("教育风险");
+        strings2_5.add("中国大陆高等教育学历核实");
+        strings2_5.add("已完成");
+        strings2_5.add(new StringBuffer("/static/image/yellow.png"));
+        List<Object> strings2_6 = new ArrayList<>();
+        strings2_6.add("教育风险");
+        strings2_6.add("中国大陆高等教育学位核实");
+        strings2_6.add("已完成");
+        strings2_6.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_7 = new ArrayList<>();
+        strings2_7.add("工作履历风险");
+        strings2_7.add("xxx有限责任公司");
+        strings2_7.add("已完成");
+        strings2_7.add(new StringBuffer("/static/image/yellow.png"));
+        List<Object> strings2_8 = new ArrayList<>();
+        strings2_8.add("工作履历风险");
+        strings2_8.add("xxx002有限责任公司");
+        strings2_8.add("已完成");
+        strings2_8.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_9 = new ArrayList<>();
+        strings2_9.add("工作表现风险");
+        strings2_9.add("xxx有限责任公司");
+        strings2_9.add("已完成");
+        strings2_9.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_10 = new ArrayList<>();
+        strings2_10.add("工作表现风险");
+        strings2_10.add("xxx002有限责任公司");
+        strings2_10.add("已完成");
+        strings2_10.add(new StringBuffer("/static/image/green.png"));
+        List<Object> strings2_11 = new ArrayList<>();
+        strings2_11.add("简历比对风险");
+        strings2_11.add("简历比对无异常");
+        strings2_11.add("已完成");
+        strings2_11.add(new StringBuffer("/static/image/blue.png"));
+        List<List<Object>> content2 = new ArrayList<>();
+        content2.add(strings2_1);
+        content2.add(strings2_2);
+        content2.add(strings2_3);
+        content2.add(strings2_4);
+        content2.add(strings2_5);
+        content2.add(strings2_6);
+        content2.add(strings2_7);
+        content2.add(strings2_8);
+        content2.add(strings2_9);
+        content2.add(strings2_10);
+        content2.add(strings2_11);
+        buildTableSpecial5(document, title, content2,4, new Long[]{2000L, 5310L, 1000L, 1000L}, 400, 8310L, 1, colorGary, null, colorBlack, 8, false, ParagraphAlignment.CENTER);
+
+        // 空一行
+        blankParagraph(document);
 
         // 风险说明表格1-红灯部分
         // 风险说明表格2-黄灯部分
-        List<Object> strings2_1 = new ArrayList<>();
-        strings2_1.add("高风险\r\nddafjdsaljl\r\nhfdosajfdowsa\r\n");
-        strings2_1.add("");
-        strings2_1.add(new StringBuffer("/static/image/yellow.png"));
-        List<List<Object>> content2 = new ArrayList<>();
-        content2.add(strings2_1);
-        // 总长度8310 一半4155 第一列空格 55 第二列 340 第三列 1000 第四列710 总共4155， 后续。。。
-        buildTableSpecial(document, null, content2,3, new Long[]{7810L, 500L, 500L}, 1000, 8310L, 0, null, colorOrange, colorBlack, 8, false, ParagraphAlignment.LEFT);
-        // 风险说明表格3-蓝灯部分
         List<Object> strings3_1 = new ArrayList<>();
         strings3_1.add("高风险\r\nddafjdsaljl\r\nhfdosajfdowsa\r\n");
         strings3_1.add("");
-        strings3_1.add(new StringBuffer("/static/image/blue.png"));
+        strings3_1.add(new StringBuffer("/static/image/yellow.png"));
         List<List<Object>> content3 = new ArrayList<>();
         content3.add(strings3_1);
         // 总长度8310 一半4155 第一列空格 55 第二列 340 第三列 1000 第四列710 总共4155， 后续。。。
-        buildTableSpecial(document, null, content3,3, new Long[]{7810L, 500L, 500L}, 1000, 8310L, 0, null, colorBlue2, colorBlack, 8, false, ParagraphAlignment.LEFT);
+        buildTableSpecial(document, null, content3,3, new Long[]{7810L, 500L, 500L}, 1000, 8310L, 0, null, colorOrange, colorBlack, 8, false, ParagraphAlignment.LEFT);
+        // 风险说明表格3-蓝灯部分
+        List<Object> strings4_1 = new ArrayList<>();
+        strings4_1.add("高风险\r\nddafjdsaljl\r\nhfdosajfdowsa\r\n");
+        strings4_1.add("");
+        strings4_1.add(new StringBuffer("/static/image/blue.png"));
+        List<List<Object>> content4 = new ArrayList<>();
+        content4.add(strings4_1);
+        // 总长度8310 一半4155 第一列空格 55 第二列 340 第三列 1000 第四列710 总共4155， 后续。。。
+        buildTableSpecial(document, null, content4,3, new Long[]{7810L, 500L, 500L}, 1000, 8310L, 0, null, colorBlue2, colorBlack, 8, false, ParagraphAlignment.LEFT);
 
     }
 
@@ -909,6 +985,140 @@ public class ProgramsWordUtils extends WordUtils {
             }
             List<Object> row = content.get(j);
             for (int i = 0; i < row.size() && i < columnNum; i++) {
+                //单元格对象
+                XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(i);
+                if (tableWidths != null) {
+                    cellWidth = tableWidths[i];
+                }
+                //添加文本，14号/黑体/左对齐
+                buildCellSpecial(xwpfTableCell, row.get(i), fontSize, bold, wordColor, align, cellWidth, null, tableBackground);
+            }
+        }
+    }
+
+    /**
+     * 创建表格
+     * @param document
+     * @param title 表格标题
+     * @param content 表格内容
+     * @param numColumn 表格列数，如果为null，则取数组tableWidths的长度为列数
+     * @param tableWidths 数组类型，表格每列的宽度
+     * @param rowsHeight 数组类型，表格每行的宽度
+     * @param tableWidth 表格宽度
+     * @param displayBorder 是否隐藏边框 0:不展示，1：展示，2：自定义边框（上下左右有边框）
+     * @param titleBackground 表格标题背景色
+     * @param tableBackground 表格背景色
+     * @param wordColor 字体颜色
+     * @param fontSize 字体大小
+     * @param bold 字体是否加粗
+     * @param align 对齐方式
+     * @throws InvalidFormatException
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public void buildTableSpecial5(XWPFDocument document
+            , List<String> title
+            , List<List<Object>> content
+            , Integer numColumn
+            , Long[] tableWidths
+            , Integer rowsHeight
+            , Long tableWidth
+            , Integer displayBorder
+            , String titleBackground
+            , String tableBackground
+            , String wordColor
+            , Integer fontSize
+            , Boolean bold
+            , ParagraphAlignment align) throws InvalidFormatException, IOException, URISyntaxException {
+        int rowNum = content.size();
+        int columnNum = numColumn == null ? tableWidths.length : numColumn;
+        if (CollectionUtils.isNotEmpty(title)) {
+            rowNum++;
+        }
+        System.out.println("rowNum=" + rowNum + ", columnNum=" + columnNum);
+        XWPFTable xwpfTable = document.createTable(rowNum, columnNum);
+        //表格居中显示
+        CTTblPr ctTblPr = xwpfTable.getCTTbl().addNewTblPr();
+        ctTblPr.addNewJc().setVal(STJc.CENTER);
+        //设置表格宽度
+        CTTblWidth ctTblWidth = ctTblPr.addNewTblW();
+        ctTblWidth.setW(BigInteger.valueOf(tableWidth));
+        //设置表格宽度为非自动
+        ctTblWidth.setType(STTblWidth.DXA);
+        Long cellWidth = null;
+        //设置边框
+        if (displayBorder == 0) {
+            displayBorder(xwpfTable);
+        } else if(displayBorder == 2) {
+            // 自定义边框：上下左右有灰色边框
+            customizeBorderSpecial(xwpfTable, colorGary);
+        }
+
+        //创建标题
+        //标题行对象
+        XWPFTableRow xwpfTableRowTitle = xwpfTable.getRow(0);
+        //标题行高
+        xwpfTableRowTitle.setHeight(rowsHeight);
+        for (int i = 0; i < title.size() && i < columnNum; i++) {
+            if (tableWidths != null) {
+                cellWidth = tableWidths[i];
+            }
+            String msg = title.get(i);
+            //单元格对象
+            XWPFTableCell xwpfTableCell = xwpfTableRowTitle.getCell(i);
+            //添加文本，9号/黑体/黑色/居中
+            buildCellSpecial(xwpfTableCell, msg, 9, true, colorBlack, align, cellWidth, null, titleBackground);
+            // 添加边框
+//                addBottomBorder(xwpfTableCell, 1, colorBlue, true);
+        }
+
+        //创建内容
+        for (int j = 0; j < content.size(); j++) {
+            //有标题时和无标题时取值位置不同
+            XWPFTableRow xwpfTableRow;
+            if (CollectionUtils.isNotEmpty(title)) {
+                // 行对象
+                xwpfTableRow = xwpfTable.getRow(j + 1);
+                //行高
+                xwpfTableRow.setHeight(rowsHeight);
+            } else {
+                // 行对象
+                xwpfTableRow = xwpfTable.getRow(j);
+                //行高
+                xwpfTableRow.setHeight(rowsHeight);
+            }
+            List<Object> row = content.get(j);
+            for (int i = 0; i < row.size() && i < columnNum; i++) {
+                // 合并单元格
+                if (i == 0 && row.get(i) instanceof String) {
+                    // 如果第一列数据为"教育风险"，则判断下一行第一列是否为"教育风险"，如果是，合并单元格
+                    if ("教育风险".equals((String) row.get(i))) {
+                        if (j + 1 < content.size()) {
+                            if ("教育风险".equals((String)content.get(j + 1).get(i))) {
+                                mergeCellsVerticallySpecial(xwpfTable, i, j + 1, j + 2);
+                            }
+                        }
+                    }
+
+                    // 如果第一列数据为"工作履历风险"，则判断下一行第一列是否为"工作履历风险"，如果是，合并单元格
+                    if ("工作履历风险".equals((String) row.get(i))) {
+                        if (j + 1 < content.size()) {
+                            if ("工作履历风险".equals((String)content.get(j + 1).get(i))) {
+                                mergeCellsVerticallySpecial(xwpfTable, i, j + 1, j + 2);
+                            }
+                        }
+                    }
+
+                    // 如果第一列数据为"工作表现风险"，则判断下一行第一列是否为"工作表现风险"，如果是，合并单元格
+                    if ("工作表现风险".equals((String) row.get(i))) {
+                        if (j + 1 < content.size()) {
+                            if ("工作表现风险".equals((String)content.get(j + 1).get(i))) {
+                                mergeCellsVerticallySpecial(xwpfTable, i, j + 1, j + 2);
+                            }
+                        }
+                    }
+                }
+
                 //单元格对象
                 XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(i);
                 if (tableWidths != null) {

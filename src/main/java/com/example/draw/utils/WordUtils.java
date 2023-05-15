@@ -1,5 +1,6 @@
 package com.example.draw.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.DocumentException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -18,7 +19,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
 public abstract class WordUtils {
 
@@ -49,12 +49,12 @@ public abstract class WordUtils {
     private static Logger logger = LoggerFactory.getLogger(WordUtils.class);
 
 
-    public void buildWord(String filePath, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws Exception {
+    public void buildWord(String filePath, JSONObject params, String getSignUrl) throws Exception {
         FileOutputStream out = null;
         XWPFDocument document = new XWPFDocument();
         try {
             out = new FileOutputStream(filePath);
-            generateWord(document, params, tableList);
+            generateWord(document, params, getSignUrl);
             document.write(out);
         } catch (Exception e) {
             throw e;
@@ -71,13 +71,12 @@ public abstract class WordUtils {
      *
      * @param document
      * @param params
-     * @param tableList
      * @throws IOException
      * @throws InvalidFormatException
      * @throws URISyntaxException
      * @throws DocumentException
      */
-    public abstract void generateWord(XWPFDocument document, Map<String, Object> params, Map<String, List<List<String>>> tableList) throws Exception;
+    public abstract void generateWord(XWPFDocument document, JSONObject params, String getSignUrl) throws Exception;
 
     /**
      * 构建主标题部分
@@ -86,50 +85,50 @@ public abstract class WordUtils {
      * @param name
      * @throws IOException
      */
-    public void buildTitleTable(XWPFDocument document, String name) throws IOException, InvalidFormatException, URISyntaxException {
-        //创建表格
-        XWPFTable table = document.createTable(1, 1);
-        List<XWPFTableRow> rows = table.getRows();
-        XWPFTableRow row = table.getRow(0);
-        XWPFTableCell imgCell = row.getCell(0);
-
-        //设置表格宽度
-        CTTblPr tablePr = table.getCTTbl().addNewTblPr();
-        //表格宽度
-        CTTblWidth width = tablePr.addNewTblW();
-        width.setW(BigInteger.valueOf(8310));
-        //设置表格宽度为非自动
-        width.setType(STTblWidth.DXA);
-        //设置边框
-        displayBorder(table);
-        //图片
-        XWPFParagraph imgParagraph = imgCell.getParagraphs().get(0);
-        XWPFRun pictureRun = imgParagraph.createRun();
-        XWPFRun titleRun = imgParagraph.createRun();
-        FileInputStream is = null;
-        try {
-            is = new FileInputStream(new File(this.getClass().getResource("/static/image/image1.png").toURI()));
-            pictureRun.addPicture(is, Document.PICTURE_TYPE_JPEG, "c1.png", Units.toEMU(120), Units.toEMU(30));
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-        titleRun.setText("            ");
-        titleRun.setText("  ");
-        titleRun.setText(name);
-        titleRun.setBold(true);
-        titleRun.setFontFamily("黑体");
-        //字体颜色
-        titleRun.setColor(colorWrite);
-        titleRun.setFontSize(18);
-
-        //背景颜色
-        imgCell.setColor(colorBlue);
-
-    }
+//    public void buildTitleTable(XWPFDocument document, String name) throws IOException, InvalidFormatException, URISyntaxException {
+//        //创建表格
+//        XWPFTable table = document.createTable(1, 1);
+//        List<XWPFTableRow> rows = table.getRows();
+//        XWPFTableRow row = table.getRow(0);
+//        XWPFTableCell imgCell = row.getCell(0);
+//
+//        //设置表格宽度
+//        CTTblPr tablePr = table.getCTTbl().addNewTblPr();
+//        //表格宽度
+//        CTTblWidth width = tablePr.addNewTblW();
+//        width.setW(BigInteger.valueOf(8310));
+//        //设置表格宽度为非自动
+//        width.setType(STTblWidth.DXA);
+//        //设置边框
+//        displayBorder(table);
+//        //图片
+//        XWPFParagraph imgParagraph = imgCell.getParagraphs().get(0);
+//        XWPFRun pictureRun = imgParagraph.createRun();
+//        XWPFRun titleRun = imgParagraph.createRun();
+//        FileInputStream is = null;
+//        try {
+//            is = new FileInputStream(new File(this.getClass().getResource("/target/classes/static/image/image1.png").toURI()));
+//            pictureRun.addPicture(is, Document.PICTURE_TYPE_JPEG, "c1.png", Units.toEMU(120), Units.toEMU(30));
+//        } catch (IOException e) {
+//            throw e;
+//        } finally {
+//            if (is != null) {
+//                is.close();
+//            }
+//        }
+//        titleRun.setText("            ");
+//        titleRun.setText("  ");
+//        titleRun.setText(name);
+//        titleRun.setBold(true);
+//        titleRun.setFontFamily("黑体");
+//        //字体颜色
+//        titleRun.setColor(colorWrite);
+//        titleRun.setFontSize(18);
+//
+//        //背景颜色
+//        imgCell.setColor(colorBlue);
+//
+//    }
 
     /**
      * 构建主表格
@@ -168,33 +167,33 @@ public abstract class WordUtils {
      * @param document
      * @param titleName
      */
-    public void buildTitle(XWPFDocument document, String titleName, String content) throws IOException, InvalidFormatException, URISyntaxException {
-
-        document.createParagraph();
-
-        XWPFParagraph titleParagraph = document.createParagraph();
-        XWPFRun titleRun = titleParagraph.createRun();
-        titleRun.setText("");
-        titleRun.setText(titleName);
-        titleRun.setBold(true);
-        titleRun.setFontFamily("黑体");
-        titleRun.setColor(colorBlue);
-
-        XWPFRun pictureRun = document.createParagraph().createRun();
-        FileInputStream is = null;
-        try {
-            is = new FileInputStream(new File(this.getClass().getResource("/static/image/line.png").toURI()));
-            pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(420), Units.toEMU(6));
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-        XWPFParagraph paragraph = document.createParagraph();
-        buildParagraph(paragraph, "    " + content, 9, null, null);
-    }
+//    public void buildTitle(XWPFDocument document, String titleName, String content) throws IOException, InvalidFormatException, URISyntaxException {
+//
+//        document.createParagraph();
+//
+//        XWPFParagraph titleParagraph = document.createParagraph();
+//        XWPFRun titleRun = titleParagraph.createRun();
+//        titleRun.setText("");
+//        titleRun.setText(titleName);
+//        titleRun.setBold(true);
+//        titleRun.setFontFamily("黑体");
+//        titleRun.setColor(colorBlue);
+//
+//        XWPFRun pictureRun = document.createParagraph().createRun();
+//        FileInputStream is = null;
+//        try {
+//            is = new FileInputStream(new File(this.getClass().getResource("/target/classes/static/image/line.png").toURI()));
+//            pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(420), Units.toEMU(6));
+//        } catch (IOException e) {
+//            throw e;
+//        } finally {
+//            if (is != null) {
+//                is.close();
+//            }
+//        }
+//        XWPFParagraph paragraph = document.createParagraph();
+//        buildParagraph(paragraph, "    " + content, 9, null, null);
+//    }
 
     /**
      * 创建表格
@@ -230,7 +229,6 @@ public abstract class WordUtils {
         if (CollectionUtils.isNotEmpty(foot)) {
             rowNum++;
         }
-        System.out.println("rowNum=" + rowNum + ", columnNum=" + columnNum);
         XWPFTable xwpfTable = document.createTable(rowNum, columnNum);
         //表格居中显示
         CTTblPr ctTblPr = xwpfTable.getCTTbl().addNewTblPr();
@@ -683,7 +681,9 @@ public abstract class WordUtils {
             XWPFRun pictureRun = cell.getParagraphs().get(0).createRun();
             FileInputStream is = null;
             try {
-                is = new FileInputStream(new File(this.getClass().getResource(((StringBuffer) value).toString()).toURI()));
+                // todo 111
+//                is = new FileInputStream(new File(this.getClass().getResource(((StringBuffer) value).toString()).toURI()));
+                is = new FileInputStream(new File(((StringBuffer) value).toString()));
                 if ("image2.jpg".equals(imageName)) {
                     pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(37.5), Units.toEMU(15));
                 } else {
@@ -900,38 +900,38 @@ public abstract class WordUtils {
      * @param titleName
      * @param content
      */
-    public void buildParagraph(XWPFDocument document, String titleName, String content) throws InvalidFormatException, IOException, URISyntaxException {
-        try {
-            XWPFParagraph titleParagraph = document.createParagraph();
-            XWPFRun titleRun = titleParagraph.createRun();
-            titleRun.setText("");
-            titleRun.setText(titleName);
-            titleRun.setBold(true);
-            titleRun.setFontFamily("黑体");
-            titleRun.setColor(colorBlue);
-
-            XWPFRun pictureRun = document.createParagraph().createRun();
-            FileInputStream is = null;
-            try {
-                is = new FileInputStream(new File(this.getClass().getResource("/static/image/line.png").toURI()));
-                pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(420), Units.toEMU(6));
-            } catch (IOException e) {
-                throw e;
-            } finally {
-                if (is != null) {
-                    is.close();
-                }
-            }
-            XWPFParagraph xwpfParagraph = document.createParagraph();
-            XWPFRun xwpfRun = xwpfParagraph.createRun();
-            xwpfRun.setText("    ");
-            xwpfRun.setText(content);
-            xwpfRun.setFontSize(9);
-            xwpfRun.setFontFamily("黑体");
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    public void buildParagraph(XWPFDocument document, String titleName, String content) throws InvalidFormatException, IOException, URISyntaxException {
+//        try {
+//            XWPFParagraph titleParagraph = document.createParagraph();
+//            XWPFRun titleRun = titleParagraph.createRun();
+//            titleRun.setText("");
+//            titleRun.setText(titleName);
+//            titleRun.setBold(true);
+//            titleRun.setFontFamily("黑体");
+//            titleRun.setColor(colorBlue);
+//
+//            XWPFRun pictureRun = document.createParagraph().createRun();
+//            FileInputStream is = null;
+//            try {
+//                is = new FileInputStream(new File(this.getClass().getResource("/target/classes/static/image/line.png").toURI()));
+//                pictureRun.addPicture(is, Document.PICTURE_TYPE_PNG, null, Units.toEMU(420), Units.toEMU(6));
+//            } catch (IOException e) {
+//                throw e;
+//            } finally {
+//                if (is != null) {
+//                    is.close();
+//                }
+//            }
+//            XWPFParagraph xwpfParagraph = document.createParagraph();
+//            XWPFRun xwpfRun = xwpfParagraph.createRun();
+//            xwpfRun.setText("    ");
+//            xwpfRun.setText(content);
+//            xwpfRun.setFontSize(9);
+//            xwpfRun.setFontFamily("黑体");
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     /**
      * 空白行
